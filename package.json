@@ -30,6 +30,9 @@
   "dependencies": {
     "clean-css": "^4.1.11",
     "html-minifier": "^3.5.19",
+    "postcss": "^7.0.2",
+    "postcss-cssnext": "^3.1.0",
+    "sass": "^1.13.4",
     "uglify-js": "^3.4.5"
   }
 }

@@ -53,8 +53,8 @@ module.exports = function(eleventyConfig) {
   });
 
   // Don't process folders with static assets e.g. images
-  eleventyConfig.addPassthroughCopy("static/img");
-  eleventyConfig.addPassthroughCopy("admin");
+  eleventyConfig.addPassthroughCopy("src/assets");
+  eleventyConfig.addPassthroughCopy("src/admin");
 
   /* Markdown Plugins */
   let markdownIt = require("markdown-it");
@@ -87,10 +87,10 @@ module.exports = function(eleventyConfig) {
     dataTemplateEngine: "njk",
     passthroughFileCopy: true,
     dir: {
-      input: ".",
+      input: "src",
       includes: "_includes",
       data: "_data",
-      output: "_site"
+      output: "dist"
     }
   };
 };
