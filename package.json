@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "description": "Custom solution for a static site generator using Netlify CMS based on danurbanowicz/eleventy-netlify-boilerplate.",
   "scripts": {
-    "installDependencies": "yarn install && yarn install --cwd src/huesos",
+    "update": "git submodule update --recursive --remote && yarn install && yarn install --cwd src/huesos",
     "build": "yarn css:build; yarn eleventy",
     "watch": "yarn eleventy --watch",
     "serve": "yarn eleventy --serve",
