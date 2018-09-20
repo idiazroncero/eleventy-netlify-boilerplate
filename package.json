@@ -3,10 +3,13 @@
   "version": "1.0.1",
   "description": "Custom solution for a static site generator using Netlify CMS based on danurbanowicz/eleventy-netlify-boilerplate.",
   "scripts": {
-    "build": "yarn eleventy",
+    "installDependencies": "yarn install && yarn install --cwd src/huesos",
+    "build": "yarn css:build; yarn eleventy",
     "watch": "yarn eleventy --watch",
     "serve": "yarn eleventy --serve",
-    "debug": "DEBUG=* npx eleventy"
+    "debug": "DEBUG=* npx eleventy",
+    "css:build": "cd src/huesos; yarn build",
+    "css:watch": "cd src/huesos; yarn watch"
   },
   "repository": {
     "type": "git",

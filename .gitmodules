@@ -1,0 +1,3 @@
+[submodule "src/huesos"]
+	path = src/huesos
+	url = git@github.com:idiazroncero/huesos.git
