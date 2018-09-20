@@ -4,12 +4,12 @@
   "description": "Custom solution for a static site generator using Netlify CMS based on danurbanowicz/eleventy-netlify-boilerplate.",
   "scripts": {
     "update": "git submodule update --recursive --remote && yarn install && yarn install --cwd src/huesos",
-    "build": "yarn css:build; yarn eleventy",
+    "build": "yarn huesos:build; yarn eleventy",
     "watch": "yarn eleventy --watch",
     "serve": "yarn eleventy --serve",
-    "debug": "DEBUG=* npx eleventy",
-    "css:build": "cd src/huesos; yarn build",
-    "css:watch": "cd src/huesos; yarn watch"
+    "debug": "DEBUG=* yarn eleventy",
+    "huesos:build": "cd src/huesos; yarn build",
+    "huesos:watch": "cd src/huesos; yarn watch"
   },
   "repository": {
     "type": "git",
