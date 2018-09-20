@@ -8,8 +8,8 @@
     "watch": "yarn eleventy --watch",
     "serve": "yarn eleventy --serve",
     "debug": "DEBUG=* yarn eleventy",
-    "huesos:build": "cd src/huesos; yarn build",
-    "huesos:watch": "cd src/huesos; yarn watch"
+    "huesos:build": "cd huesos; yarn build",
+    "huesos:watch": "cd huesos; yarn watch"
   },
   "repository": {
     "type": "git",
