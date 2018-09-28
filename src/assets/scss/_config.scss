@@ -1,0 +1,414 @@
+// ------
+// COLOR PALETTE
+// ------
+// Use get-color('palette', 'color') in your .scss files to get values
+// For example: getColor('base', 'primary') => #C65146
+// Use contrast-color($color) to get your black || white color against a background
+// ------
+
+$colors: (
+	base: (
+		"primary":   #C65146,
+		"secondary":   #C65146,
+		"lines":     #DCDCDC
+	),
+
+	text: (
+		"primary":   #1A1A19,
+		"heading":   #1A1A19,
+		"active": #383837,
+		"mark" : #FCEE35,
+	),
+
+	background: (
+		"dark":  #1A1A19,
+		"dim" : #EEEEEE,
+		"light": #FFFFFF,
+	),
+
+	state: (
+		"muted":   #EEE,
+		"success": #10A887,
+		"warning": #F17F42,
+		"error":   #DA3C3C
+	),
+
+	blue: (
+		"darker":  #1573B6,
+		"dark":    #1E80C6,
+		"base":    #2B90D9,
+		"light":   #3FA2E9,
+		"lighter": #4EB1F9
+	),
+
+	green: (
+		"darker":  #089073,
+		"dark":    #0B9D7D,
+		"base":    #10A887,
+		"light":   #1EB896,
+		"lighter": #28CEAA
+	),
+
+	red: (
+		"darker":  #653131,
+		"dark":    #B73333,
+		"base":    #DA3C3C,
+		"light":   #F25A5A,
+		"lighter": #FA8181
+	),
+
+	gray: (
+		"black" : #1B1B1B,
+		"darker":  #333333,
+		"dark":    #666666,
+		"base":    #888888,
+		"light":   #CCCCCC,
+		"lighter": #DDDDDD,
+		"white" : #FFFFFF,
+	)
+) !default;
+
+// CONTRAST BLACK AND WHITE / Do not remove
+// This values are used as return values for contrast-color()
+$contrast-dark: #1A1A19;
+$contrast-light: #FFFFFF;
+
+// Global % to apply to darken and lighten operations
+$color-modify-ratio: 33%;
+
+
+
+// --------------------
+// VERTICAL RHYTHM
+// Using Ritmo.scss
+// --------------------
+
+$base-font-size: 24px;
+$vertical-rhythm: 1.5;
+$base-line-height: $base-font-size * $vertical-rhythm;
+$base-line-multi: 4;
+$base-line-unit: $base-line-height / $base-line-multi;
+$ritmo-unit: 'rem';
+$rem-with-px-fallback: true;
+$ritmo-border-width: 1px;
+$round-to-nearest-half-size: true;
+
+// Show a grid to see vertical rhythm in action
+$show-grid: false;
+
+// A "spacer" is a basic unit for both vertical and horizontal spacing
+$spacer: ritmo(4); 
+
+
+
+
+
+// ------
+// TIPOGRAPHY
+// ------
+
+// Web-safe fonts library
+$helvetica: Helvetica, Arial sans-serif;
+$arial: Arial, Helvetica, sans-serif;
+$lucida-sans: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+$tahoma: Tahoma, Geneva, sans-serif;
+$trebuchet: "Trebuchet MS", Helvetica, sans-serif;
+$verdana: Verdana, Geneva, sans-serif;
+
+$courier: Courier, monospace;
+$courier-new: "Courier New", Courier, monospace;
+$lucida-console: "Lucida Console", Monaco, monospace;
+
+$palatino: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+$times-new-roman: "Times New Roman", Times, Georgia, serif;
+$times: "Times New Roman", Times, Georgia, serif;
+$georgia: Georgia, serif;
+
+// Custom fonts
+$martel: Martel, $georgia;
+$quicksand: Quicksand, $helvetica;
+
+// Global variables. It is good practice (performance & design) to only use one or two typefaces.
+$font-main: $quicksand;
+$font-secondary: $martel;
+
+// Custom values for bold and light allow for more precise mapping
+$bold: 700;
+$font-main-bold: 700;
+$font-secondary-bold: 900;
+$light: light;
+$normal: normal;
+
+// List of all elements which use $font-secondary.
+$font-secondary-items:
+	h1, h2, h3, h4, dt,
+	'.your-classes',
+	'#your-ids';
+
+// Select a font weight for your headings
+$heading-font-weight: normal;
+
+// Text alignment for some elements
+$caption-align: left;
+$figcaption-align:left;
+
+// Quotes
+// Here are some common quotes: “ ” ‘ ’ ‛ ‟ ‚ „ ' " ‹ › « »
+$quotes: "“" "”" "‘" "’";
+
+// Code-like items
+$code-background: get-color(background, dim);
+$code-border-radius: 3px;
+
+
+
+
+
+// ------
+// TYPE SCALE
+// Source: http://type-scale.com/ and concise.css
+// ------
+
+$minor-second:     1.067 !default;
+$major-second:     1.125 !default;
+$minor-third:      1.200 !default;
+$major-third:      1.250 !default;
+$perfect-fourth:   1.333 !default;
+$augmented-fourth: 1.414 !default;
+$perfect-fifth:    1.500 !default;
+$golden-ratio:     1.618 !default;
+
+// Choose your type-scale ratio
+$scale-ratio: $perfect-fourth !default;
+
+// Uses concise.css typeScale mixin to map font-sizes
+$h1-font-size: typeScale(6);
+$h2-font-size: typeScale(5);
+$h3-font-size: typeScale(4);
+$h4-font-size: typeScale(3);
+$h5-font-size: typeScale(2); // Equals base-font-size
+$h6-font-size: typeScale(1);
+
+// Set font sizes of specific, size-aware elements
+$sub-font-size: $h6-font-size;
+$small-font-size: $h6-font-size;
+$figcaption-font-size: $h6-font-size;
+
+
+
+
+
+
+
+// ------
+// COMMON ELEMENTS
+// ------
+// Some common patterns
+// ------
+
+$separators: true;
+$separator-width: 1px;
+$separator-color: get-color(gray,light);
+
+$table-border: 1px solid $separator-color; // CSS value or none
+$table-padding: $spacer / 2;
+$table-th-align: left;
+
+$blockquote-whitespace: $spacer * 2;
+$blockquote-decoration: '*';
+$blockquote-decoration-size: $h2-font-size;
+$blockquote-font: $font-secondary;
+
+$shadows: true;
+$shadow-definition: 2px 2px 2px 0px rgba(get-color(gray, "black"), 0.1);
+
+
+
+
+// ------
+// LINKS
+// ------
+// This values are used by set-link() to get your linking strategy
+// There are four link strategies available.
+// ------
+
+$link-strategy: underline; // Alternatives: underline, border, smart, mark
+$link-highlight-on-hover: true; // "false" highlights the link before :hover
+
+// Only for $link-strategy:border
+$link-border-color: get-color(blue, base);
+$link-border-width: ritmo(1);
+
+// Only for $link-strategy:mark
+$link-mark-color: get-color(green, lighter);
+
+// Only for $link-strategy:smart
+$link-smart-background: get-color(gray, "white");
+
+// Link colors
+$link-color: get-color(blue, base);
+$link-visited: get-color(blue, darker);
+$link-hover: get-color(blue,light);
+$link-active: get-color(blue, darker);
+
+
+
+
+
+// ------
+// FORMS
+// ------
+
+// General reset
+$form-border-radius: 0;
+
+// Inputs
+$input-border-strategy: bottom; // Options: full, bottom, none;
+$input-border-color: get-color(gray, dark);
+$input-border: 1px solid $input-border-color;
+$input-padding: 0;
+
+// Buttons
+$button-border-color: get-color(gray, dark);
+$button-border: 2px solid $button-border-color;
+$button-padding: 0 ($spacer / 2);
+$button-border-radius: 3px;
+
+// Checkboxes / Selects
+$pseudo-checkbox : false;
+$pseudo-radio: false;
+
+// Selects
+$select-border-strategy: full; // Options: full, bottom, none;
+$select-border-color: darken(get-color(gray,base), 25%);
+$select-border: 1px solid $input-border-color;
+$select-padding: 0 ($spacer / 2);
+
+// Browser quirks
+$webkit-autofill-color: get-color(gray, base); // When webkit fills the fields whith your stored data.
+
+
+
+
+
+// ------
+// LAYOUT
+// We asume a centered, responsive and max-width limited viewport.
+// ------
+
+$max-width: 960px;
+$layout-align: center; // left, right
+
+
+
+
+
+// ------
+// Z-INDEX
+// To use in pair with the z-index() function
+// ------
+
+$z-index : (
+	item1 : 0,
+	item2 : 1,
+);
+
+
+
+
+
+// ------
+// BREAKPOINTS
+// ------
+
+$small: 640px;
+$medium: 960px;
+$large: 1120px;
+
+
+
+
+
+// ------
+// ANIMATIONS && TRANSITIONS
+// ------
+
+$transitions: true;
+$transition-time: 0.33s;
+$transition-delay: 0.25s;
+
+$disabled-opacity: 0.33;
+
+
+
+
+
+// ------
+// ALIASES
+// Because sometimes you remember the wrong / old / deprecated word...
+// ------
+
+$gutter: $spacer;
+
+
+
+
+
+// ------
+// CARDS
+// Component for indvidual, card-like componentes
+// ------
+
+$card-border-color: $separator-color;
+$card-border-radius: 2px;
+
+
+
+// ------
+// YOUR PROJECT
+// Project-specific variables
+// ------
+
+
+
+// ------
+// KSS-NODE
+// This is to be parsed with KSS-Node and assign custom weight to elements
+// ------
+
+// Base
+//
+// Weight: 1
+//
+// Styleguide Base
+
+// Typography
+//
+// Weight: 2
+//
+// Styleguide Typography
+
+// Components
+//
+// Weight: 3
+//
+// Styleguide Components
+
+// Helpers
+//
+// Weight: 4
+//
+// Styleguide Helpers
+
+// Mixins
+//
+// Weight: 5
+//
+// Styleguide Mixins
+
+// Functions
+//
+// Weight: 6
+//
+// Styleguide Functions
+

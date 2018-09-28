@@ -9,7 +9,8 @@
     "serve": "yarn eleventy --serve",
     "debug": "DEBUG=* yarn eleventy",
     "huesos:build": "cd huesos; yarn build",
-    "huesos:watch": "cd huesos; yarn watch"
+    "huesos:watch": "cd huesos; yarn watch",
+    "sass": "node-sass src/assets/scss/style.scss  src/assets/css/style.css"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,8 @@
   "dependencies": {
     "clean-css": "^4.1.11",
     "html-minifier": "^3.5.19",
+    "huesos": "^1.0.1",
+    "node-sass": "^4.9.3",
     "postcss": "^7.0.2",
     "postcss-cssnext": "^3.1.0",
     "sass": "^1.13.4",
