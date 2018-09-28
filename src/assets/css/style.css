@@ -1,10 +1,5 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Martel:700,900|Quicksand:400,700");
-body {
-  display: flex; }
-  body a {
-    display: none; }
-
 @-webkit-keyframes bounce {
   0%, 20%, 50%, 80%, 100% {
     -webkit-transform: translateY(0);
@@ -16378,8 +16373,8 @@ html {
   font-family: Quicksand, Helvetica, Arial sans-serif; }
 
 html {
-  font-size: 150%;
-  line-height: 1.5em; }
+  font-size: 137.5%;
+  line-height: 1.33em; }
 
 p, h1, h2, h3, h4, h5, h6,
 ul, ol, dl,
@@ -16388,13 +16383,13 @@ figure, audio, video,
 hr,
 table, caption, figcaption,
 fieldset {
-  margin: 0 0 1.5rem 0; }
+  margin: 0 0 1.33rem 0; }
 
 dd {
-  margin: 0 0 0 1.5rem; }
+  margin: 0 0 0 1.33rem; }
 
 ol, ul {
-  padding-left: 1.5rem; }
+  padding-left: 1.33rem; }
 
 .list--inline {
   margin: 0;
@@ -16465,10 +16460,10 @@ nav ul {
 pre {
   font-family: monospace, monospace;
   /* 1 */
-  font-size: 24px;
+  font-size: 22px;
   font-size: 1rem;
-  line-height: 36px;
-  line-height: 1.5rem;
+  line-height: 29px;
+  line-height: 1.33rem;
   /* 2 */ }
 
 /* Text-level semantics (https://html.spec.whatwg.org/multipage/semantics.html#text-level-semantics)
@@ -16512,10 +16507,10 @@ samp,
 var {
   font-family: monospace, monospace;
   /* 1 */
-  font-size: 24px;
+  font-size: 22px;
   font-size: 1rem;
-  line-height: 36px;
-  line-height: 1.5rem;
+  line-height: 29px;
+  line-height: 1.33rem;
   /* 2 */ }
 
 /**
@@ -16535,28 +16530,28 @@ mark {
  * Add the correct font size in all browsers.
  */
 small {
-  font-size: 18px;
+  font-size: 17px;
   font-size: 0.75019rem;
-  line-height: 27px;
-  line-height: 1.125rem; }
+  line-height: 22px;
+  line-height: 0.9975rem; }
 
 h1 small {
-  font-size: 43px;
+  font-size: 39px;
   font-size: 1.77689rem;
-  line-height: 54px;
-  line-height: 2.25rem; }
+  line-height: 44px;
+  line-height: 1.995rem; }
 
 h2 small {
-  font-size: 32px;
+  font-size: 29px;
   font-size: 1.333rem;
-  line-height: 36px;
-  line-height: 1.5rem; }
+  line-height: 37px;
+  line-height: 1.6625rem; }
 
 h3 small {
-  font-size: 24px;
+  font-size: 22px;
   font-size: 1rem;
-  line-height: 36px;
-  line-height: 1.5rem; }
+  line-height: 29px;
+  line-height: 1.33rem; }
 
 /**
  * Prevent `sub` and `sup` elements from affecting the line height in
@@ -16564,10 +16559,10 @@ h3 small {
  */
 sub,
 sup {
-  font-size: 18px;
+  font-size: 17px;
   font-size: 0.75019rem;
-  line-height: 27px;
-  line-height: 1.125rem;
+  line-height: 22px;
+  line-height: 0.9975rem;
   line-height: 0;
   position: relative;
   vertical-align: baseline; }
@@ -16910,7 +16905,7 @@ textarea {
   font-family: inherit; }
 
 label {
-  margin-right: 0.75rem; }
+  margin-right: 0.665rem; }
 
 input:-webkit-autofill,
 textarea:-webkit-autofill,
@@ -16929,8 +16924,8 @@ input {
   input:focus {
     outline: 0; }
   input[type=checkbox], input[type=radio] {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     vertical-align: middle; }
   input[type=search] {
     -webkit-appearance: textfield;
@@ -16948,7 +16943,7 @@ input {
       display: inline-block;
       width: 1em;
       height: 1em;
-      margin: 6px;
+      margin: 3.63px;
       border: 1px solid #666666;
       background-color: #FFFFFF;
       vertical-align: top;
@@ -16960,7 +16955,7 @@ input {
     input[type=radio].pseudo-radio + label:before {
       content: "";
       display: inline-block;
-      margin: 6px;
+      margin: 3.63px;
       width: 1em;
       height: 1em;
       border: 1px solid #666666;
@@ -16973,7 +16968,7 @@ input {
 
 select {
   border: 1px solid #666666;
-  padding: 0 0.75rem;
+  padding: 0 0.665rem;
   appearance: none;
   /* Move the label to the top */ }
   select:hover, select:focus {
@@ -16989,19 +16984,19 @@ button,
 input[type=file] + label {
   background: none;
   outline: none;
-  padding: 0 0.75rem;
+  padding: 0 0.665rem;
   /* IE8 and FF freak out if this rule is within another selector */
   cursor: pointer;
   border: 2px solid #666666;
   border-radius: 3px;
   display: inline-block;
-  padding: 0 0.75rem;
+  padding: 0 0.665rem;
   text-transform: uppercase;
   letter-spacing: 0.05rem;
-  font-size: 18px;
+  font-size: 17px;
   font-size: 0.75019rem;
-  line-height: 45px;
-  line-height: 1.875rem; }
+  line-height: 37px;
+  line-height: 1.6625rem; }
   input[type=submit]::-moz-focus-inner,
   input[type=reset]::-moz-focus-inner,
   input[type=button]::-moz-focus-inner,
@@ -17099,19 +17094,19 @@ textarea {
   /* Turn off scroll bars in IE unless needed */
   overflow: auto;
   width: 100%;
-  padding: 0 0.375rem; }
+  padding: 0 0.3325rem; }
 
 fieldset {
   margin-right: 0;
   margin-left: 0;
   border: 1px solid #666666;
-  padding: 1.5rem; }
+  padding: 1.33rem; }
 
 legend {
   font-weight: 700; }
 
 .form-item {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.33rem;
   display: flex; }
   .form-item label {
     flex: 0 1 auto; }
@@ -17123,40 +17118,40 @@ legend {
   color: #DA3C3C; }
 
 h1, .h1 {
-  font-size: 76px;
+  font-size: 69px;
   font-size: 3.15733rem;
-  line-height: 81px;
-  line-height: 3.375rem; }
+  line-height: 80px;
+  line-height: 3.6575rem; }
 
 h2, .h2 {
-  font-size: 57px;
+  font-size: 52px;
   font-size: 2.36859rem;
-  line-height: 63px;
-  line-height: 2.625rem; }
+  line-height: 59px;
+  line-height: 2.66rem; }
 
 h3, .h3 {
-  font-size: 43px;
+  font-size: 39px;
   font-size: 1.77689rem;
-  line-height: 54px;
-  line-height: 2.25rem; }
+  line-height: 44px;
+  line-height: 1.995rem; }
 
 h4, .h4 {
-  font-size: 32px;
+  font-size: 29px;
   font-size: 1.333rem;
-  line-height: 36px;
-  line-height: 1.5rem; }
+  line-height: 37px;
+  line-height: 1.6625rem; }
 
 h5, .h5 {
-  font-size: 24px;
+  font-size: 22px;
   font-size: 1rem;
-  line-height: 36px;
-  line-height: 1.5rem; }
+  line-height: 29px;
+  line-height: 1.33rem; }
 
 h6, .h6 {
-  font-size: 18px;
+  font-size: 17px;
   font-size: 0.75019rem;
-  line-height: 27px;
-  line-height: 1.125rem; }
+  line-height: 22px;
+  line-height: 0.9975rem; }
 
 h1, h2, h3, h4, h5, h6 .h1, .h2, .h3, .h4, .h5, .h6 {
   color: #1A1A19;
@@ -17200,27 +17195,27 @@ q {
   quotes: "“" "”" "‘" "’"; }
 
 blockquote {
-  margin: 0 0 1.5rem 3rem; }
+  margin: 0 0 1.33rem 2.66rem; }
 
 .blockquote--decorated {
   position: relative; }
   .blockquote--decorated:before {
     content: "*";
-    font-size: 57px;
+    font-size: 52px;
     font-size: 2.36859rem;
-    line-height: 63px;
-    line-height: 2.625rem;
+    line-height: 59px;
+    line-height: 2.66rem;
     font-family: Martel, Georgia, serif;
     position: absolute;
-    top: 0.375rem;
-    left: -3rem; }
+    top: 0.3325rem;
+    left: -2.66rem; }
 
 code,
 kbd,
 samp,
 var {
   background-color: #EEEEEE;
-  padding: 0 0.375rem;
+  padding: 0 0.3325rem;
   border-radius: 3px; }
 
 table {
@@ -17229,16 +17224,16 @@ table {
 
 th, td {
   border: 1px solid #CCCCCC;
-  padding: 0.75rem; }
+  padding: 0.665rem; }
 
 th {
   text-align: left; }
 
 figcaption {
-  font-size: 18px;
+  font-size: 17px;
   font-size: 0.75019rem;
-  line-height: 27px;
-  line-height: 1.125rem;
+  line-height: 22px;
+  line-height: 0.9975rem;
   text-align: left; }
 
 a, a:link {
@@ -17281,10 +17276,10 @@ body {
   margin-right: auto; }
 
 #main-wrapper {
-  padding: 1.5rem; }
+  padding: 1.33rem; }
 
 .card {
-  padding: 1.5rem;
+  padding: 1.33rem;
   border: 1px solid #CCCCCC;
   border-radius: 2px;
   box-shadow: 2px 2px 2px 0px rgba(27, 27, 27, 0.1); }
@@ -17299,4 +17294,4 @@ nav ul,
     display: inline-block; }
   nav ul ul,
   .nav ul ul {
-    margin-left: 1.5rem; }
+    margin-left: 1.33rem; }

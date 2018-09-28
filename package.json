@@ -1,16 +1,16 @@
 {
   "name": "eleventy-netlify-cms",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Custom solution for a static site generator using Netlify CMS based on danurbanowicz/eleventy-netlify-boilerplate.",
   "scripts": {
     "update": "git submodule update --recursive --remote && yarn install && yarn install --cwd src/huesos",
-    "build": "yarn huesos:build; yarn eleventy",
+    "build": "yarn sass:prod; yarn eleventy",
     "watch": "yarn eleventy --watch",
     "serve": "yarn eleventy --serve",
     "debug": "DEBUG=* yarn eleventy",
-    "huesos:build": "cd huesos; yarn build",
-    "huesos:watch": "cd huesos; yarn watch",
-    "sass": "node-sass src/assets/scss/style.scss  src/assets/css/style.css"
+    "sass": "node-sass src/assets/scss/style.scss src/assets/css/style.css --source-map=true",
+    "sass:prod": "node-sass src/assets/scss/style.scss src/assets/css/style.css --output-style=compressed",
+    "sass:watch": "node-sass src/assets/scss/style.scss src/assets/css/style.css -w"
   },
   "repository": {
     "type": "git",
