@@ -3,12 +3,12 @@
 
 	{% include "components/head.njk" %}
 
-	<body>
+	<body class="p">
 
 		<header>
-			<em>
-				<a href="{{ '/' | url }}">{{ metadata.title }}</a>
-			</em>
+			<div class="logo mb">
+				<a class="link--inactive h1" href="{{ '/' | url }}"><span class="strong">{{ metadata.title }}</span></a>
+			</div>
 			{% include "components/nav.njk" %}
 		</header>
 

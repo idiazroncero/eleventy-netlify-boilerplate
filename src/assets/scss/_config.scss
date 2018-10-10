@@ -6,6 +6,7 @@
 // Use contrast-color($color) to get your black || white color against a background
 // ------
 
+
 $colors: (
 	base: (
 		"primary":   #C65146,
@@ -17,7 +18,7 @@ $colors: (
 		"primary":   #1A1A19,
 		"heading":   #1A1A19,
 		"active": #383837,
-		"mark" : #FCEE35,
+		"mark" : goldenRod,
 	),
 
 	background: (
@@ -68,13 +69,17 @@ $colors: (
 	)
 ) !default;
 
+// Quick access to black and white
+$black: get-color(gray, "black");
+$white: get-color(gray, "white");
+
 // CONTRAST BLACK AND WHITE / Do not remove
 // This values are used as return values for contrast-color()
 $contrast-dark: #1A1A19;
 $contrast-light: #FFFFFF;
 
 // Global % to apply to darken and lighten operations
-$color-modify-ratio: 33%;
+$color-modify-ratio: 50%;
 
 
 
@@ -83,8 +88,8 @@ $color-modify-ratio: 33%;
 // Using Ritmo.scss
 // --------------------
 
-$base-font-size: 22px;
-$vertical-rhythm: 1.33;
+$base-font-size: 18px;
+$vertical-rhythm: 1.4;
 $base-line-height: $base-font-size * $vertical-rhythm;
 $base-line-multi: 4;
 $base-line-unit: $base-line-height / $base-line-multi;
@@ -104,7 +109,7 @@ $spacer: ritmo(4);
 
 
 // ------
-// TIPOGRAPHY
+// TYPOGRAPHY
 // ------
 
 // Web-safe fonts library
@@ -125,19 +130,23 @@ $times: "Times New Roman", Times, Georgia, serif;
 $georgia: Georgia, serif;
 
 // Custom fonts
-$martel: Martel, $georgia;
-$quicksand: Quicksand, $helvetica;
+$krub: 'Krub', $helvetica;
+$merriweather: 'Merriweather', $georgia;
+
+$fira-sans: 'Fira Sans', $helvetica;
+$lato: 'Lato', $helvetica;
+
 
 // Global variables. It is good practice (performance & design) to only use one or two typefaces.
-$font-main: $quicksand;
-$font-secondary: $martel;
+$font-main: $lato;
+$font-secondary: $fira-sans;
 
 // Custom values for bold and light allow for more precise mapping
 $bold: 700;
 $font-main-bold: 700;
-$font-secondary-bold: 900;
+$font-secondary-bold: 800;
 $light: light;
-$normal: normal;
+$normal: 300;
 
 // List of all elements which use $font-secondary.
 $font-secondary-items:
@@ -145,8 +154,11 @@ $font-secondary-items:
 	'.your-classes',
 	'#your-ids';
 
-// Select a font weight for your headings
+// Heading overrides
+// Select a font weight and an alternate line height for your headings
 $heading-font-weight: normal;
+$heading-vertical-rhythm:1; // We might want a slower VR for headings. Set to false if not.
+
 
 // Text alignment for some elements
 $caption-align: left;
@@ -157,8 +169,11 @@ $figcaption-align:left;
 $quotes: "“" "”" "‘" "’";
 
 // Code-like items
-$code-background: get-color(background, dim);
-$code-border-radius: 3px;
+$code-background: get-color(background, dark);
+$code-border-radius: 4px;
+
+// Letter-spacing (always EM units to keep it relative to the element scope)
+$letter-spacing: 0.05em; 
 
 
 
@@ -206,6 +221,8 @@ $figcaption-font-size: $h6-font-size;
 // Some common patterns
 // ------
 
+$border-radius: 3px;
+
 $separators: true;
 $separator-width: 1px;
 $separator-color: get-color(gray,light);
@@ -233,7 +250,7 @@ $shadow-definition: 2px 2px 2px 0px rgba(get-color(gray, "black"), 0.1);
 // ------
 
 $link-strategy: underline; // Alternatives: underline, border, smart, mark
-$link-highlight-on-hover: true; // "false" highlights the link before :hover
+$link-highlight-on-hover: false; // "false" highlights the link before :hover
 
 // Only for $link-strategy:border
 $link-border-color: get-color(blue, base);
@@ -260,35 +277,55 @@ $link-active: get-color(blue, darker);
 // ------
 
 // General reset
-$form-border-radius: 0;
+$form-border-radius: $border-radius;
 
 // Inputs
-$input-border-strategy: bottom; // Options: full, bottom, none;
-$input-border-color: get-color(gray, dark);
+$input-border-strategy: full; // Options: full, bottom, none;
+$input-border-color: get-color(gray, lighter);
 $input-border: 1px solid $input-border-color;
-$input-padding: 0;
+$input-padding: $spacer / 4 $spacer / 2;
 
 // Buttons
-$button-border-color: get-color(gray, dark);
+$button-border-color: get-color(gray, darker);
 $button-border: 2px solid $button-border-color;
 $button-padding: 0 ($spacer / 2);
-$button-border-radius: 3px;
+$button-border-radius: $border-radius;
 
 // Checkboxes / Selects
 $pseudo-checkbox : false;
 $pseudo-radio: false;
+$pseudo-border-color: get-color(text, primary);
+$pseudo-border: 1px solid $pseudo-border-color;
 
 // Selects
 $select-border-strategy: full; // Options: full, bottom, none;
-$select-border-color: darken(get-color(gray,base), 25%);
+$select-border-color: shade(get-color(gray,base), 25%);
 $select-border: 1px solid $input-border-color;
 $select-padding: 0 ($spacer / 2);
 
 // Browser quirks
 $webkit-autofill-color: get-color(gray, base); // When webkit fills the fields whith your stored data.
 
+// Fieldsets
+$disable-fieldset: false;
 
 
+// ------
+// NAVIGATION
+// Default menu appearance
+// ------
+
+$nav-font-weight: bold;
+$nav-uppercase: true;
+$nav-font-size: $base-font-size;
+$nav-spacing: $letter-spacing;
+
+$toc-font-weight: bold;
+$toc-uppercase: false;
+$toc-font-size: $h5-font-size;
+
+$menu-padding: $spacer / 2;
+$menu-background-color: get-color(base, primary);
 
 
 // ------
@@ -360,7 +397,7 @@ $gutter: $spacer;
 // ------
 
 $card-border-color: $separator-color;
-$card-border-radius: 2px;
+$card-border-radius: $border-radius;
 
 
 
@@ -411,4 +448,19 @@ $card-border-radius: 2px;
 // Weight: 6
 //
 // Styleguide Functions
+
+// Pseudo-elements
+//
+// Weight: 7
+//
+// Styleguide Pseudo-elements
+
+
+// Huesitos
+//
+// Provide quick helper classes for common cases (like adding margin, padding or borders)
+//
+// Weight: 8
+//
+// Styleguide Huesitos
 

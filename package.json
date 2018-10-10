@@ -3,14 +3,15 @@
   "version": "1.0.2",
   "description": "Custom solution for a static site generator using Netlify CMS based on danurbanowicz/eleventy-netlify-boilerplate.",
   "scripts": {
-    "update": "git submodule update --recursive --remote && yarn install && yarn install --cwd src/huesos",
-    "build": "yarn sass:prod; yarn eleventy",
+    "build": "yarn sass:prod; yarn styleguide; yarn eleventy",
     "watch": "yarn eleventy --watch",
     "serve": "yarn eleventy --serve",
     "debug": "DEBUG=* yarn eleventy",
-    "sass": "node-sass src/assets/scss/style.scss src/assets/css/style.css --source-map=true",
-    "sass:prod": "node-sass src/assets/scss/style.scss src/assets/css/style.css --output-style=compressed",
-    "sass:watch": "node-sass src/assets/scss/style.scss src/assets/css/style.css -w"
+    "sass": "yarn node-sass src/assets/scss/style.scss src/assets/css/style.css --source-map=true",
+    "sass:prod": "yarn node-sass src/assets/scss/style.scss src/assets/css/style.css --output-style=compressed",
+    "sass:watch": "yarn node-sass src/assets/scss/style.scss src/assets/css/style.css -w",
+    "sass:styleguide": "yarn node-sass src/assets/scss/style.scss src/assets/css/styleguide/styleguide.css --source-comments=true --output-style=expanded",
+    "styleguide": "yarn sass:styleguide; yarn kss --source src/assets/css/styleguide --destination docs --css ../src/assets/css/styleguide/styleguide.css --builder node_modules/huesos/src/kss-src"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
     "clean-css": "^4.1.11",
     "html-minifier": "^3.5.19",
     "huesos": "^1.0.1",
+    "kss": "^3.0.0-beta.23",
     "node-sass": "^4.9.3",
     "postcss": "^7.0.2",
     "postcss-cssnext": "^3.1.0",

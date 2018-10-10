@@ -1,9 +1,9 @@
 {
-  "title": "Eleventy Netlify Boilerplate",
-  "url": "https://eleventy-netlify-boilerplate.netlify.com",
+  "title": "Eleventy Netlify CMS",
+  "url": "https://eleventy-netlify-cms.netlify.com",
   "author": {
-    "name": "Dan Urbanowicz",
-    "email": "dan.urbanowicz@gmail.com",
-    "github": "https://github.com/danurbanowicz"
+    "name": "Ignacio Díaz-Roncero",
+    "email": "idiaz.roncero@gmail.com",
+    "github": "https://github.com/idiazroncero"
   }
 }
