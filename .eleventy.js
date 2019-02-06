@@ -12,6 +12,57 @@ module.exports = function(eleventyConfig) {
     return DateTime.fromJSDate(dateObj).toFormat("dd LLL yyyy");
   });
 
+  eleventyConfig.addFilter("picture", sourceFile => {
+    var sourcePointSplit = sourceFile.split('.')
+    var sourceBarSplit = sourceFile.split('/')
+    var sourceExt = sourcePointSplit[1];
+    var sourceFullName = sourceBarSplit[sourceBarSplit.length - 1];
+    var sourceName = sourceFullName.split('.')[0];
+    var sourceDirArray = sourceBarSplit.filter(function(item, index){
+      return index < (sourceBarSplit.length - 1)
+    });
+    var sourceDir = sourceDirArray.join('/');
+    var sizes = {
+      small: sourceDir + '/small/' + sourceName + '-small.' + sourceExt,
+      small2x: sourceDir + '/small/' + sourceName + '-small@2x.' + sourceExt,
+      smallWebp: sourceDir + '/small/' + sourceName + '-small.webp',
+      smallWebp2x: sourceDir + '/small/' + sourceName + '-small@2x.webp',
+      medium: sourceDir + '/medium/' + sourceName + '-medium.' + sourceExt,
+      medium2x: sourceDir + '/medium/' + sourceName + '-medium@2x.' + sourceExt,
+      mediumWebp: sourceDir + '/medium/' + sourceName + '-medium.webp',
+      mediumWebp2x: sourceDir + '/medium/' + sourceName + '-medium@2x.webp',
+      large: sourceDir + '/large/' + sourceName + '-large.' + sourceExt,
+      large2x: sourceDir + '/large/' + sourceName + '-large@2x.' + sourceExt,
+      largeWebp: sourceDir + '/large/' + sourceName + '-large.webp',
+      largeWebp2x: sourceDir + '/large/' + sourceName + '-large@2x.webp'
+    }
+    var html = `<picture>
+        <source type="image/webp"
+          srcset="${ sizes.smallWebp } 480w,
+                  ${ sizes.smallWebp2x } 960w,
+                  ${ sizes.mediumWebp } 800w,
+                  ${ sizes.mediumWebp2x } 1600w,
+                  ${ sizes.largeWebp } 1400w,
+                  ${ sizes.largeWebp2x } 2800w"
+          sizes = "100vw
+                  "
+          />
+        <source 
+        srcset="${ sizes.smallWebp } 480w,
+                ${ sizes.smallWebp2x } 960w,
+                ${ sizes.mediumWebp } 800w,
+                ${ sizes.mediumWebp2x } 1600w,
+                ${ sizes.largeWebp } 1400w,
+                ${ sizes.largeWebp2x } 2800w"
+          sizes = "100vw
+                  "
+          />
+        <img src="${ sizes.large }" />
+      </picture>`
+    return html;
+  });
+
+
   // Date formatting (machine readable)
   eleventyConfig.addFilter("machineDate", dateObj => {
     return DateTime.fromJSDate(dateObj).toFormat("yyyy-MM-dd");
