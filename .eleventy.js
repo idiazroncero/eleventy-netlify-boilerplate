@@ -63,6 +63,17 @@ module.exports = function(eleventyConfig) {
   });
 
 
+  eleventyConfig.addFilter("img", sourceFile => {
+    var sourcePointSplit = sourceFile.split('.')
+    var webp = sourcePointSplit[0] + '.webp';
+    var html = `<picture>
+        <source type="image/webp" srcset="${  webp }" />
+        <source srcset="${ sourceFile }" />
+        <img src="${ sourceFile }" />
+      </picture>`
+    return html;
+  });
+
   // Date formatting (machine readable)
   eleventyConfig.addFilter("machineDate", dateObj => {
     return DateTime.fromJSDate(dateObj).toFormat("yyyy-MM-dd");
