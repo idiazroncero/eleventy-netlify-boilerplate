@@ -21,7 +21,7 @@ function compileSass() {
 };
 
 function watchSass() {
-  return watch('./src/assets/scss/style.scss', compileSass );
+  return watch('./src/assets/scss/**/*.scss', compileSass );
 };
 
 
