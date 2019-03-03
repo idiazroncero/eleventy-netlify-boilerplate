@@ -6,72 +6,138 @@
 // Use contrast-color($color) to get your black || white color against a background
 // ------
 
+/*
+Color Palette
+
+The palettes are based on palx.jxnblk.com (for example, https://palx.jxnblk.com/C7FFC4). Every single palette lives on a separate `.scss` file under 
+`base/palettes` and is `@import`ed on `_config.scss` for later use on the `$colors` map.
+
+This `$colors` map can store as many maps as needed, but the following are mandatory:
+
+- base / for primary, secondary and separator colors
+- text / for typography colors
+- state / for indicating states like: muted, error, warning, success
+
+Following palx.jxnblk.com nomenclature, the colors are numbered from 0 to 9 (lightest to darkest).
+
+Markup:
+<section>
+	<p class="minititle">Base</p>
+	<div class="grid grid--gutterless grid--small--2col grid--medium--6col grid--large--3col">
+		<div class="grid-item p bg-base-primary">Primary</div>
+		<div class="grid-item p bg-base-secondary" >Secondary</div>
+		<div class="grid-item p bg-base-separator" >Separator</div>
+		<div class="grid-item p bg-base-black" >Black</div>
+		<div class="grid-item p bg-base-white" >White</div>
+	</div>
+</section>
+<section>
+	<p class="minititle">Text</p>
+	<div class="grid grid--gutterless grid--small--2col grid--large--3col">
+		<div class="grid-item p bg-text-primary">Primary</div>
+		<div class="grid-item p bg-text-heading" >Heading</div>
+		<div class="grid-item p bg-text-mark" >Mark</div>
+	</div>
+</section>
+<section>
+	<p class="minititle">State</p>
+	<div class="grid grid--gutterless grid--small--2col grid--large--4col">
+		<div class="grid-item p bg-state-muted">Muted</div>
+		<div class="grid-item p bg-state-success" >Success</div>
+		<div class="grid-item p bg-state-warning" >Warning</div>
+		<div class="grid-item p bg-state-error" >Error</div>
+	</div>
+</section>
+
+Styleguide Color.palette
+*/
+
+@import "base/palettes/C7FFC4";
 
 $colors: (
 	base: (
-		"primary":   #C65146,
-		"secondary":   #C65146,
-		"lines":     #DCDCDC
+		"primary": $blue6,
+		"secondary": $blue8,
+		"separator": $gray2,
+		"black": $gray9,
+		"white": #fff,
 	),
 
 	text: (
-		"primary":   #1A1A19,
-		"heading":   #1A1A19,
-		"active": #383837,
-		"mark" : goldenRod,
+		"primary":   $gray9,
+		"heading":   $indigo9,
+		"mark" : $orange5,
 	),
 
 	background: (
-		"dark":  #1A1A19,
-		"dim" : #EEEEEE,
-		"light": #FFFFFF,
+		"dark":  $gray8,
+		"dim" : $gray1,
+		"light": $gray0,
 	),
 
 	state: (
-		"muted":   #EEE,
-		"success": #10A887,
-		"warning": #F17F42,
-		"error":   #DA3C3C
+		"muted":   $gray1,
+		"success": $teal4,
+		"warning": $yellow5,
+		"error":   $red5
 	),
 
 	blue: (
-		"darker":  #1573B6,
-		"dark":    #1E80C6,
-		"base":    #2B90D9,
-		"light":   #3FA2E9,
-		"lighter": #4EB1F9
+		"0" : $blue0,
+		"1" : $blue1,
+		"2" : $blue2,
+		"3" : $blue3,
+		"4" : $blue4,
+		"5" : $blue5,
+		"6" : $blue6,
+		"7" : $blue7,
+		"8" : $blue8,
+		"9" : $blue9,
 	),
 
 	green: (
-		"darker":  #089073,
-		"dark":    #0B9D7D,
-		"base":    #10A887,
-		"light":   #1EB896,
-		"lighter": #28CEAA
+		"0" : $teal0,
+		"1" : $teal1,
+		"2" : $teal2,
+		"3" : $teal3,
+		"4" : $teal4,
+		"5" : $teal5,
+		"6" : $teal6,
+		"7" : $teal7,
+		"8" : $teal8,
+		"9" : $teal9,
 	),
 
 	red: (
-		"darker":  #653131,
-		"dark":    #B73333,
-		"base":    #DA3C3C,
-		"light":   #F25A5A,
-		"lighter": #FA8181
+		"0" : $red0,
+		"1" : $red1,
+		"2" : $red2,
+		"3" : $red3,
+		"4" : $red4,
+		"5" : $red5,
+		"6" : $red6,
+		"7" : $red7,
+		"8" : $red8,
+		"9" : $red9,
 	),
 
 	gray: (
-		"black" : #1B1B1B,
-		"darker":  #333333,
-		"dark":    #666666,
-		"base":    #888888,
-		"light":   #CCCCCC,
-		"lighter": #DDDDDD,
-		"white" : #FFFFFF,
+		"0" : $gray0,
+		"1" : $gray1,
+		"2" : $gray2,
+		"3" : $gray3,
+		"4" : $gray4,
+		"5" : $gray5,
+		"6" : $gray6,
+		"7" : $gray7,
+		"8" : $gray8,
+		"9" : $gray9,
 	)
 ) !default;
 
 // Quick access to black and white
-$black: get-color(gray, "black");
-$white: get-color(gray, "white");
+$black: get-color(base, "black");
+$white: get-color(base, "white");
 
 // CONTRAST BLACK AND WHITE / Do not remove
 // This values are used as return values for contrast-color()
@@ -79,7 +145,11 @@ $contrast-dark: #1A1A19;
 $contrast-light: #FFFFFF;
 
 // Global % to apply to darken and lighten operations
-$color-modify-ratio: 50%;
+$color-modify-ratio: 33%;
+
+// Wether to generate helper classes or not.
+// Set this to false to avoid bloating your css
+$generate-color-classes: true;
 
 
 
@@ -88,8 +158,8 @@ $color-modify-ratio: 50%;
 // Using Ritmo.scss
 // --------------------
 
-$base-font-size: 18px;
-$vertical-rhythm: 1.4;
+$base-font-size: 16px;
+$vertical-rhythm: 1.35;
 $base-line-height: $base-font-size * $vertical-rhythm;
 $base-line-multi: 4;
 $base-line-unit: $base-line-height / $base-line-multi;
@@ -136,10 +206,16 @@ $merriweather: 'Merriweather', $georgia;
 $fira-sans: 'Fira Sans', $helvetica;
 $lato: 'Lato', $helvetica;
 
+$vt323 : 'VT323', monospace;
+$inconsolata: 'Inconsolata', monospace;
+
+
+
 
 // Global variables. It is good practice (performance & design) to only use one or two typefaces.
 $font-main: $lato;
 $font-secondary: $fira-sans;
+$font-monospace: $inconsolata;
 
 // Custom values for bold and light allow for more precise mapping
 $bold: 700;
@@ -158,22 +234,25 @@ $font-secondary-items:
 // Select a font weight and an alternate line height for your headings
 $heading-font-weight: normal;
 $heading-vertical-rhythm:1; // We might want a slower VR for headings. Set to false if not.
-
+$heading-letter-spacing: -0.03em; // Headings benefit of a reduced letter-spacing 
 
 // Text alignment for some elements
 $caption-align: left;
-$figcaption-align:left;
+$figcaption-align: left;
 
 // Quotes
 // Here are some common quotes: “ ” ‘ ’ ‛ ‟ ‚ „ ' " ‹ › « »
 $quotes: "“" "”" "‘" "’";
 
 // Code-like items
-$code-background: get-color(background, dark);
-$code-border-radius: 4px;
+$code-background: get-color(base, separator);
+$code-border-radius: 2px;
 
 // Letter-spacing (always EM units to keep it relative to the element scope)
 $letter-spacing: 0.05em; 
+
+// List paddings. We recommend either 1em or 0.
+$list-padding: 0;
 
 
 
@@ -221,11 +300,11 @@ $figcaption-font-size: $h6-font-size;
 // Some common patterns
 // ------
 
-$border-radius: 3px;
+$border-radius: 0px;
 
 $separators: true;
 $separator-width: 1px;
-$separator-color: get-color(gray,light);
+$separator-color: get-color(base, separator);
 
 $table-border: 1px solid $separator-color; // CSS value or none
 $table-padding: $spacer / 2;
@@ -237,7 +316,7 @@ $blockquote-decoration-size: $h2-font-size;
 $blockquote-font: $font-secondary;
 
 $shadows: true;
-$shadow-definition: 2px 2px 2px 0px rgba(get-color(gray, "black"), 0.1);
+$shadow-definition: 2px 2px 2px 0px rgba($black, 0.1);
 
 
 
@@ -249,25 +328,30 @@ $shadow-definition: 2px 2px 2px 0px rgba(get-color(gray, "black"), 0.1);
 // There are four link strategies available.
 // ------
 
-$link-strategy: underline; // Alternatives: underline, border, smart, mark
+$link-strategy: underline; // Alternatives: underline, border, smart, mark, false
 $link-highlight-on-hover: false; // "false" highlights the link before :hover
 
 // Only for $link-strategy:border
-$link-border-color: get-color(blue, base);
-$link-border-width: ritmo(1);
+$link-border-color: $violet2;
+$link-border-width: ritmo(0.5);
 
 // Only for $link-strategy:mark
-$link-mark-color: get-color(green, lighter);
+$link-mark-color: $violet2;
 
 // Only for $link-strategy:smart
-$link-smart-background: get-color(gray, "white");
+$link-smart-background: $violet2;
 
 // Link colors
-$link-color: get-color(blue, base);
-$link-visited: get-color(blue, darker);
-$link-hover: get-color(blue,light);
-$link-active: get-color(blue, darker);
+$link-color: $violet7;
+$link-visited: $violet7;
+$link-hover: $violet5;
+$link-active: $violet5;
 
+// Inverse link colors (for contrasted backgrounds)
+$inverse-link-color: $white;
+$inverse-link-visited: $white;
+$inverse-link-hover: $blue2;
+$inverse-link-active: $blue2;
 
 
 
@@ -281,15 +365,21 @@ $form-border-radius: $border-radius;
 
 // Inputs
 $input-border-strategy: full; // Options: full, bottom, none;
-$input-border-color: get-color(gray, lighter);
+$input-border-color: get-color(gray, "2");
 $input-border: 1px solid $input-border-color;
 $input-padding: $spacer / 4 $spacer / 2;
 
 // Buttons
-$button-border-color: get-color(gray, darker);
-$button-border: 2px solid $button-border-color;
+$button-font-family: $font-main;
+$button-strategy: 'border'; // Options: border, background
+$button-strategy-border: 'fill'; // Only if $button-strategy = border. Options: fill, highlight
+$button-color: $gray8;
+$button-border-width: 2px;
+$button-border: $button-border-width solid $button-color;
 $button-padding: 0 ($spacer / 2);
-$button-border-radius: $border-radius;
+$button-border-radius: 2px; // $border-radius;
+$button-weight: $bold;
+$button-invert-color: false; // ONly valid on border:fill and background
 
 // Checkboxes / Selects
 $pseudo-checkbox : false;
@@ -299,12 +389,12 @@ $pseudo-border: 1px solid $pseudo-border-color;
 
 // Selects
 $select-border-strategy: full; // Options: full, bottom, none;
-$select-border-color: shade(get-color(gray,base), 25%);
+$select-border-color: shade(get-color(gray, "5"), 25%);
 $select-border: 1px solid $input-border-color;
 $select-padding: 0 ($spacer / 2);
 
 // Browser quirks
-$webkit-autofill-color: get-color(gray, base); // When webkit fills the fields whith your stored data.
+$webkit-autofill-color: get-color(gray, "5"); // When webkit fills the fields whith your stored data.
 
 // Fieldsets
 $disable-fieldset: false;
@@ -325,7 +415,8 @@ $toc-uppercase: false;
 $toc-font-size: $h5-font-size;
 
 $menu-padding: $spacer / 2;
-$menu-background-color: get-color(base, primary);
+$menu-kill-links: true;
+$menu-background-color: get-color(base, secondary);
 
 
 // ------
@@ -358,9 +449,17 @@ $z-index : (
 // BREAKPOINTS
 // ------
 
-$small: 640px;
-$medium: 960px;
-$large: 1120px;
+// Map for iterations
+$breakpoints: (
+	small : 640px,
+	medium : 960px,
+	large : 1120px
+);
+
+// Helpers for a simpler use on breakpoint() mixin
+$small: map-get($breakpoints, small);
+$medium: map-get($breakpoints, medium);
+$large: map-get($breakpoints, large);
 
 
 
@@ -396,8 +495,10 @@ $gutter: $spacer;
 // Component for indvidual, card-like componentes
 // ------
 
-$card-border-color: $separator-color;
+$card-border: 1px solid $separator-color;// Can be false or a full border value, like 2px solid $separator-color;
+$card-background: $white;
 $card-border-radius: $border-radius;
+$card-padding: $gutter * 2;
 
 
 
@@ -413,54 +514,71 @@ $card-border-radius: $border-radius;
 // This is to be parsed with KSS-Node and assign custom weight to elements
 // ------
 
-// Base
+// Color
 //
 // Weight: 1
+//
+// Styleguide Color
+
+// Base
+//
+// Weight: 2
 //
 // Styleguide Base
 
 // Typography
 //
-// Weight: 2
+// Weight: 3
 //
 // Styleguide Typography
 
 // Components
 //
-// Weight: 3
+// Weight: 4
 //
 // Styleguide Components
 
+// Layout
+//
+// Weight: 5
+//
+// Styleguide Layout
+
+// Forms
+//
+// Weight: 6
+//
+// Styleguide Forms
+
 // Helpers
 //
-// Weight: 4
+// Weight: 7
 //
 // Styleguide Helpers
 
 // Mixins
 //
-// Weight: 5
+// Weight: 8
 //
 // Styleguide Mixins
 
 // Functions
 //
-// Weight: 6
+// Weight: 9
 //
 // Styleguide Functions
 
 // Pseudo-elements
 //
-// Weight: 7
+// Weight: 10
 //
 // Styleguide Pseudo-elements
-
 
 // Huesitos
 //
 // Provide quick helper classes for common cases (like adding margin, padding or borders)
 //
-// Weight: 8
+// Weight: 11
 //
 // Styleguide Huesitos
 
