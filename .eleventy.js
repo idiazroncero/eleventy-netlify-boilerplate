@@ -2,6 +2,8 @@ const { DateTime } = require("luxon");
 const CleanCSS = require("clean-css");
 const UglifyJS = require("uglify-js");
 const htmlmin = require("html-minifier");
+const showdown = require('showdown');
+const converter = new showdown.Converter();
 
 module.exports = function(eleventyConfig) {
 
@@ -10,6 +12,11 @@ module.exports = function(eleventyConfig) {
   // Date formatting (human readable)
   eleventyConfig.addFilter("readableDate", dateObj => {
     return DateTime.fromJSDate(dateObj).toFormat("dd LLL yyyy");
+  });
+
+  eleventyConfig.addFilter("markdownify", string => {
+    var html = converter.makeHtml(string);
+    return html;
   });
 
   eleventyConfig.addFilter("picture", sourceFile => {

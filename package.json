@@ -33,7 +33,8 @@
     "gulp-webp": "^4.0.1",
     "luxon": "^1.0.0",
     "markdown-it": "^8.4.1",
-    "markdown-it-anchor": "^4.0.0"
+    "markdown-it-anchor": "^4.0.0",
+    "showdown": "^1.9.0"
   },
   "dependencies": {
     "clean-css": "^4.1.11",
