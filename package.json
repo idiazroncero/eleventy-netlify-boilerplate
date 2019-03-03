@@ -3,7 +3,7 @@
   "version": "1.0.2",
   "description": "Custom solution for a static site generator using Netlify CMS based on danurbanowicz/eleventy-netlify-boilerplate.",
   "scripts": {
-    "build": "yarn sass:prod; yarn styleguide; yarn eleventy",
+    "build": "yarn gulp build",
     "watch": "yarn eleventy --watch",
     "serve": "yarn eleventy --serve",
     "debug": "DEBUG=* yarn eleventy",

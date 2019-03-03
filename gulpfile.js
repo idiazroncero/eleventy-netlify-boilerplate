@@ -179,13 +179,12 @@ exports.resizeImages = resizeImages;
 exports.cleanImages = cleanImages;
 
 // Grouped tasks
-exports.styleguide = compileStyleguide;
+exports.styleguide =  series(compileStyleguideSass, compileStyleguide)
 exports.fullStyleguide = series(compileStyleguideSass, compileStyleguide);
 exports.processImages = series(cleanImages, resizeImages, minifyImages);
 
 // Main build process. Respect the order!
 exports.build = series(
     series(cleanImages, resizeImages, minifyImages),
-    runEleventy,
-    series(compileStyleguideSass, compileStyleguide)
+    runEleventy
 )

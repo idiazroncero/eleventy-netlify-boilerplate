@@ -147,6 +147,8 @@ module.exports = function(eleventyConfig) {
     markdownTemplateEngine: "liquid",
     htmlTemplateEngine: "njk",
     dataTemplateEngine: "njk",
+
+    // Allows copy of non-processed files and folders (assets, etc)
     passthroughFileCopy: true,
     dir: {
       input: "src",
