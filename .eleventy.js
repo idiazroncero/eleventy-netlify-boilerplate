@@ -107,7 +107,7 @@ module.exports = function(eleventyConfig) {
       let minified = htmlmin.minify(content, {
         useShortDoctype: true,
         removeComments: true,
-        collapseWhitespace: true
+        collapseWhitespace: false,
       });
       return minified;
     }
@@ -124,6 +124,7 @@ module.exports = function(eleventyConfig) {
   // Don't process folders with static assets e.g. images
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy("src/admin");
+  eleventyConfig.addPassthroughCopy("src/public");
 
   /* Markdown Plugins */
   let markdownIt = require("markdown-it");

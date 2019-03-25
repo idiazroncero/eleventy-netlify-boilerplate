@@ -48,23 +48,23 @@ function compileStyleguide(cb) {
 
 // Image optimization, resizing, etc
 function minifyImages() {
-    return src('src/assets/img/**/*')
+    return src('src/public/images/**/*')
         .pipe(imagemin())
         .pipe(webp())
-		.pipe(dest('src/assets/img'))
+		.pipe(dest('src/public/images'))
 };
 
 function cleanImages() {
     return del([
-        'src/assets/img/**/small',
-        'src/assets/img/**/medium',
-        'src/assets/img/**/large',
-        'src/assets/img/**/thumb',
+        'src/public/images/**/small',
+        'src/public/images/**/medium',
+        'src/public/images/**/large',
+        'src/public/images/**/thumb',
     ])
 };
 
 function resizeImages() {
-    return src('src/assets/img/**/*.{png,jpg,webp}')
+    return src('src/public/images/**/*.{png,jpg,webp}')
         .pipe(responsive({
             '**/*.{png,jpg,webp}': 
                 [
@@ -154,7 +154,7 @@ function resizeImages() {
                 withMetadata: false,
             }
         ))
-        .pipe(dest('src/assets/img/'));
+        .pipe(dest('src/public/images'));
 }
 
 // Validators
