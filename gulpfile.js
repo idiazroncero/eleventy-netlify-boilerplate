@@ -149,7 +149,7 @@ function resizeImages() {
             {  
                 withoutEnlargement: true,
                 skipOnEnlargement: true,
-                errorOnEnlargement: false,
+                errorOnEnlargement: true, // Change this to allow to skip crops
                 quality: 85,
                 progressive: true,
                 withMetadata: false,

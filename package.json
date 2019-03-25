@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "clean-css": "^4.1.11",
+    "directory-tree": "^2.2.1",
     "gulp": "^4.0.0",
     "gulp-cli": "^2.0.1",
     "html-minifier": "^3.5.19",
