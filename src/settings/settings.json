@@ -1,0 +1,6 @@
+{
+    "layout": "pages/home.njk",
+    "permalink": "/",
+    "section": "home"
+}
+  

@@ -74,7 +74,6 @@ function resizeImages() {
                         height: 150,
                         rename: function(path) {
                             path.dirname += "/thumb";
-                            path.basename += '-thumb';
                             return path;
                         }
                     },
@@ -83,15 +82,7 @@ function resizeImages() {
                         height: 150 * 2,
                         rename: function(path) {
                             path.dirname += "/thumb";
-                            path.basename += '-thumb@2x';
-                            return path;
-                        }
-                    },
-                    {
-                        width: 480 * 2,
-                        rename: function(path) {
-                            path.dirname += "/small";
-                            path.basename += '-small@2x';
+                            path.basename += '@2x';
                             return path;
                         }
                     },
@@ -99,7 +90,6 @@ function resizeImages() {
                         width: 480,
                         rename: function(path) {
                             path.dirname += "/small";
-                            path.basename += '-small';
                             return path;
                         }
                     },
@@ -107,7 +97,7 @@ function resizeImages() {
                         width: 480 * 2,
                         rename: function(path) {
                             path.dirname += "/small";
-                            path.basename += '-small@2x';
+                            path.basename += '@2x';
                             return path;
                         }
                     },
@@ -115,7 +105,6 @@ function resizeImages() {
                         width: 800,
                         rename: function(path) {
                             path.dirname += "/medium";
-                            path.basename += '-medium';
                             return path;
                         }
                     },
@@ -123,7 +112,7 @@ function resizeImages() {
                         width: 800 * 2,
                         rename: function(path) {
                             path.dirname += "/medium";
-                            path.basename += '-medium@2x';
+                            path.basename += '@2x';
                             return path;
                         }
                     },
@@ -131,7 +120,6 @@ function resizeImages() {
                         width: 1400,
                         rename: function(path) {
                             path.dirname += "/large";
-                            path.basename += '-large';
                             return path;
                         }
                     },
@@ -139,7 +127,7 @@ function resizeImages() {
                         width: 1400 * 2,
                         rename: function(path) {
                             path.dirname += "/large";
-                            path.basename += '-large@2x';
+                            path.basename += '@2x';
                             return path;
                         }
                     },

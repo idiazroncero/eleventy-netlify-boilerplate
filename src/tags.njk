@@ -15,7 +15,7 @@ layout: layouts/base.njk
 <h1>Tagged “{{ tag }}”</h1>
 
 {% set postslist = collections[ tag ] %}
-{% include "components/postslist.njk" %}
+{% include "iterators/postslist.njk" %}
 
 <nav>
   <a href="{{ '/blog/' | url }}">← Blog index</a>

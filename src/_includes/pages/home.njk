@@ -3,6 +3,8 @@ layout: layouts/base.njk
 section: home
 ---
 
-{{ 'test.jpg' | picture | safe }}
+<div class="mb">
+    {{ 'small/test.jpg' |image | safe }}
+</div>
 
 {{ layoutContent | safe }}

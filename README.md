@@ -50,3 +50,8 @@ For non-responsive images, an img filter is also provided in order to output bot
 `yarn sass:prod` compiles sass into css without sourcemaps and compressed.
 
 `yarn sass:watch` starts a watch process for SASS.
+
+## TODO
+
+- Add metadata on _head.njk and a way to config it on metadata.json
+
