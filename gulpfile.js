@@ -128,7 +128,7 @@ function resizeImages() {
                         }
                     },
                     {
-                        width: 1200,
+                        width: 1400,
                         rename: function(path) {
                             path.dirname += "/large";
                             path.basename += '-large';
@@ -136,7 +136,7 @@ function resizeImages() {
                         }
                     },
                     {
-                        width: 1200 * 2,
+                        width: 1400 * 2,
                         rename: function(path) {
                             path.dirname += "/large";
                             path.basename += '-large@2x';
