@@ -56,6 +56,7 @@ function minifyImages() {
 
 function cleanImages() {
     return del([
+        'src/public/images/**/*.webp',
         'src/public/images/**/small',
         'src/public/images/**/medium',
         'src/public/images/**/large',
@@ -127,7 +128,7 @@ function resizeImages() {
                         }
                     },
                     {
-                        width: 1400,
+                        width: 1200,
                         rename: function(path) {
                             path.dirname += "/large";
                             path.basename += '-large';
@@ -135,7 +136,7 @@ function resizeImages() {
                         }
                     },
                     {
-                        width: 1400 * 2,
+                        width: 1200 * 2,
                         rename: function(path) {
                             path.dirname += "/large";
                             path.basename += '-large@2x';
