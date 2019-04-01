@@ -18,18 +18,40 @@ collections:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Publish Date', name: 'date', widget: 'datetime' }
       - { label: 'Summary', name: 'summary', widget: 'text' }
-      - { label: 'Tags', name: 'tags', widget: 'list', default: ['post'] }
+      - { label: "Featured image", name: "featured_image", widget: "image" }
+      - { label: 'Tags', name: 'tags', widget: 'list', default: ['post'], required: false}
       - { label: 'Body', name: 'body', widget: 'markdown' }
+      - { label: 'Hide title', name: 'title_hidden', widget: 'boolean', required: false }
   # Our pages e.g. About
   - name: 'pages'
     label: 'Page'
     folder: 'src/pages'
-    create: false # Change to true to allow editors to create new pages
+    create: true # Change to true to allow editors to create new pages
     slug: '{{slug}}'
     fields:
       - { label: 'Title', name: 'title', widget: 'string' }
       - { label: 'Publish Date', name: 'date', widget: 'datetime' }
       - { label: 'Permalink', name: 'permalink', widget: 'string' }
-      - { label: 'Navigation Title', name: 'navtitle', widget: 'string' }
-      - { label: 'Tags', name: 'tags', widget: 'hidden', default: 'nav' }
+      - { label: 'Navigation Title', name: 'navtitle', widget: 'string', required: false, hint: "A navigation title will make this item appear on the main menu of the site" }
+      - { label: 'Tags', name: 'tags', widget: 'hidden', default: 'nav', required: false }
       - { label: 'Body', name: 'body', widget: 'markdown' }
+      - label: 'Hide title'
+        name: 'titleStatus'
+        widget: 'select'
+        options:
+          - { label: 'Visible', value: true } 
+          - { label: 'Visually hidden', value: 'visually-hidden' } 
+          - { label: 'Hidden', value: false } 
+        default: true
+        hint: "This content title won't appear on the page"
+
+  # Global site-wide configuration
+  - name: 'settings'
+    label: 'Settings'
+    folder: 'src/settings'
+    create: false # Change to true to allow editors to create new pages
+    slug: '{{slug}}'
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Site description', name: 'site_description', widget: 'text' }
+      - { label: "Site image", name: "site_image", widget: "image" }

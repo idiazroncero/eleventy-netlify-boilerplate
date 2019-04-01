@@ -3,4 +3,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/assets/css/style.css">
   <title>{{ title or metadata.title }}</title>
+
+
+
+  {% if metadata.debug %}
+    <style>
+      .debug {
+        font-size:0.75rem;
+        position:fixed;
+        top:1rem;
+        left: 1rem;
+        background: #000;
+        padding: 1rem 2rem;
+        color: #fff;
+        opacity:0.1;
+      }
+      .debug:hover {
+        opacity:1;
+      }
+    </style>
+
+	{% endif %}
 </head>

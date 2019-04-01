@@ -1,6 +1,6 @@
 {
   "name": "eleventy-netlify-cms",
-  "version": "1.0.2",
+  "version": "0.1.0",
   "description": "Custom solution for a static site generator using Netlify CMS based on danurbanowicz/eleventy-netlify-boilerplate.",
   "scripts": {
     "build": "yarn gulp build",
@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "clean-css": "^4.1.11",
+    "directory-tree": "^2.2.1",
     "gulp": "^4.0.0",
     "gulp-cli": "^2.0.1",
     "html-minifier": "^3.5.19",

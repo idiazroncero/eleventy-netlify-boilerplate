@@ -9,15 +9,31 @@
 			<div class="logo mb">
 				<a class="link--inactive h1" href="{{ '/' | url }}"><span class="strong">{{ metadata.title }}</span></a>
 			</div>
-			{% include "components/nav.njk" %}
+			{% include "components/menu.njk" %}
 		</header>
 
 		<main>
-			{{ layoutContent | safe }}
+			<div class="text">
+				{% if titleStatus != false %}
+    				<h2 {% if titleStatus == 'visually-hidden'%}class="visually-hidden"{% endif %}>{{ title }} {{ title_hidden }}</h2>
+				{% endif %}
+				{{ layoutContent | safe }}
+			</div>
 		</main>
 
 		{% include "components/footer.njk" %}
 
 	</body>
+
+	{% if metadata.debug %}
+		<div class="debug">
+			<ul class="m0">
+				<li>Section: {{ section }}</li>
+				<li>Title Status: {{ titleStatus }}</li>
+				<li></li>
+			</ul>
+		</div>
+
+	{% endif %}
 
 </html>
