@@ -1,8 +1,10 @@
 ---
-title: Home
-navtitle: home
+navtitle: Home
 tags: 
   - nav
+layout: pages/home.njk
+permalink: /
+section: home
 ---
 ## ¡Hola!
 

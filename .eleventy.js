@@ -12,8 +12,6 @@ const fs = require('fs');
 
 function filePaths(file, size){
   var sourceExt = file.split('.')[1];
-  // TODO handle this goddamit conversion
-  sourceExt = sourceExt == 'jpg' ? 'jpeg' : '';
   const sourceName = file.split('.')[0];
 
   const path = sourceDir + '/' + size + '/' + sourceName + '.' + sourceExt;
@@ -152,6 +150,7 @@ module.exports = function(eleventyConfig) {
   // Don't process folders with static assets e.g. images
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy("src/admin");
+  eleventyConfig.addPassthroughCopy("src/public");
 
   /* Markdown Plugins */
   let markdownIt = require("markdown-it");

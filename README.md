@@ -1,5 +1,8 @@
 # Eleventy + Netlify CMS Static Site Generator
 
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/idiazroncero/eleventy-netlify-cms)
+
+
 ## Stack
 
 This is a custom solution for static, NetlifyCMS-enabled websites developed by and for [idiaz.roncero](http://idiazroncero.com).

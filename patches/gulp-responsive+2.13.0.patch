@@ -1,0 +1,13 @@
+diff --git a/node_modules/gulp-responsive/lib/format.js b/node_modules/gulp-responsive/lib/format.js
+index 99c88ef..228b05a 100644
+--- a/node_modules/gulp-responsive/lib/format.js
++++ b/node_modules/gulp-responsive/lib/format.js
+@@ -8,7 +8,7 @@ module.exports = function(filePath) {
+     case '.jpeg':
+     case '.jpg':
+     case '.jpe':
+-      return 'jpeg';
++      return 'jpg';
+     case '.png':
+       return 'png';
+     case '.webp':

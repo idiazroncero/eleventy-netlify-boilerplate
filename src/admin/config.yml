@@ -48,10 +48,16 @@ collections:
   # Global site-wide configuration
   - name: 'settings'
     label: 'Settings'
-    folder: 'src/settings'
-    create: false # Change to true to allow editors to create new pages
-    slug: '{{slug}}'
-    fields:
-      - { label: 'Title', name: 'title', widget: 'string' }
-      - { label: 'Site description', name: 'site_description', widget: 'text' }
-      - { label: "Site image", name: "site_image", widget: "image" }
+    files:
+      - label: 'Home page'
+        name: 'home'
+        file:  'src/settings/home.md'
+        fields:
+          - { label: 'Navigation Title', name: 'navtitle', widget: 'string', required: false, hint: "A navigation title will make this item appear on the main menu of the site" }
+          - { label: 'Body', name: 'body', widget: 'markdown' }
+      - label: 'General'
+        name: 'general'
+        file: 'src/settings/general.md'
+        fields:
+          - { label: 'Site description', name: 'site_description', widget: 'text' }
+          - { label: "Site image", name: "site_image", widget: "image" }
