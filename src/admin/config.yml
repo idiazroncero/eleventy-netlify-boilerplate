@@ -53,8 +53,13 @@ collections:
         name: 'home'
         file:  'src/settings/home.md'
         fields:
+          - { label: 'Title', name: 'title', widget: 'hidden' }
+          - { label: 'Tags', name: 'tags', widget: 'hidden' }
+          - { label: 'Layout', name: 'layout', widget: 'hidden' }
+          - { label: 'Permalink', name: 'permalink', widget: 'hidden' }
+          - { label: 'Section', name: 'section', widget: 'hidden' }
           - { label: 'Navigation Title', name: 'navtitle', widget: 'string', required: false, hint: "A navigation title will make this item appear on the main menu of the site" }
-          - { label: 'Body', name: 'body', widget: 'markdown' }
+          - { label: 'Body', name: 'body', widget: 'markdown', required: false }
       - label: 'General'
         name: 'general'
         file: 'src/settings/general.md'
