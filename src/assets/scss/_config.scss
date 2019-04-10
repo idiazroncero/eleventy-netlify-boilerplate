@@ -1,63 +1,15 @@
-// ------
+// --------------------
 // COLOR PALETTE
-// ------
-// Use get-color('palette', 'color') in your .scss files to get values
-// For example: getColor('base', 'primary') => #C65146
-// Use contrast-color($color) to get your black || white color against a background
-// ------
+// Using https://palx.jxnblk.com/
+// --------------------
 
-/*
-Color Palette
-
-The palettes are based on palx.jxnblk.com (for example, https://palx.jxnblk.com/C7FFC4). Every single palette lives on a separate `.scss` file under 
-`base/palettes` and is `@import`ed on `_config.scss` for later use on the `$colors` map.
-
-This `$colors` map can store as many maps as needed, but the following are mandatory:
-
-- base / for primary, secondary and separator colors
-- text / for typography colors
-- state / for indicating states like: muted, error, warning, success
-
-Following palx.jxnblk.com nomenclature, the colors are numbered from 0 to 9 (lightest to darkest).
-
-Markup:
-<section>
-	<p class="minititle">Base</p>
-	<div class="grid grid--gutterless grid--small--2col grid--medium--6col grid--large--3col">
-		<div class="grid-item p bg-base-primary">Primary</div>
-		<div class="grid-item p bg-base-secondary" >Secondary</div>
-		<div class="grid-item p bg-base-separator" >Separator</div>
-		<div class="grid-item p bg-base-black" >Black</div>
-		<div class="grid-item p bg-base-white" >White</div>
-	</div>
-</section>
-<section>
-	<p class="minititle">Text</p>
-	<div class="grid grid--gutterless grid--small--2col grid--large--3col">
-		<div class="grid-item p bg-text-primary">Primary</div>
-		<div class="grid-item p bg-text-heading" >Heading</div>
-		<div class="grid-item p bg-text-mark" >Mark</div>
-	</div>
-</section>
-<section>
-	<p class="minititle">State</p>
-	<div class="grid grid--gutterless grid--small--2col grid--large--4col">
-		<div class="grid-item p bg-state-muted">Muted</div>
-		<div class="grid-item p bg-state-success" >Success</div>
-		<div class="grid-item p bg-state-warning" >Warning</div>
-		<div class="grid-item p bg-state-error" >Error</div>
-	</div>
-</section>
-
-Styleguide Color.palette
-*/
-
-@import "base/palettes/C7FFC4";
+// We recommend to import a palx palette and use their nomenclature
+@import "base/palettes/306BAC";
 
 $colors: (
 	base: (
 		"primary": $blue6,
-		"secondary": $blue8,
+		"secondary": $orange6,
 		"separator": $gray2,
 		"black": $gray9,
 		"white": #fff,
@@ -76,62 +28,10 @@ $colors: (
 	),
 
 	state: (
-		"muted":   $gray1,
+		"muted":   $gray9,
 		"success": $teal4,
 		"warning": $yellow5,
 		"error":   $red5
-	),
-
-	blue: (
-		"0" : $blue0,
-		"1" : $blue1,
-		"2" : $blue2,
-		"3" : $blue3,
-		"4" : $blue4,
-		"5" : $blue5,
-		"6" : $blue6,
-		"7" : $blue7,
-		"8" : $blue8,
-		"9" : $blue9,
-	),
-
-	green: (
-		"0" : $teal0,
-		"1" : $teal1,
-		"2" : $teal2,
-		"3" : $teal3,
-		"4" : $teal4,
-		"5" : $teal5,
-		"6" : $teal6,
-		"7" : $teal7,
-		"8" : $teal8,
-		"9" : $teal9,
-	),
-
-	red: (
-		"0" : $red0,
-		"1" : $red1,
-		"2" : $red2,
-		"3" : $red3,
-		"4" : $red4,
-		"5" : $red5,
-		"6" : $red6,
-		"7" : $red7,
-		"8" : $red8,
-		"9" : $red9,
-	),
-
-	gray: (
-		"0" : $gray0,
-		"1" : $gray1,
-		"2" : $gray2,
-		"3" : $gray3,
-		"4" : $gray4,
-		"5" : $gray5,
-		"6" : $gray6,
-		"7" : $gray7,
-		"8" : $gray8,
-		"9" : $gray9,
 	)
 ) !default;
 
@@ -146,6 +46,13 @@ $contrast-light: #FFFFFF;
 
 // Global % to apply to darken and lighten operations
 $color-modify-ratio: 33%;
+
+// Darken and lighten % to apply to split-color operations
+$darken-split-ratio: 50%;
+$lighten-split-ratio: 70%;
+
+// Lightness threshold for color invertion. A value between 0-100.
+$lightness-threshold: 60;
 
 // Wether to generate helper classes or not.
 // Set this to false to avoid bloating your css
@@ -182,47 +89,39 @@ $spacer: ritmo(4);
 // TYPOGRAPHY
 // ------
 
-// Web-safe fonts library
-$helvetica: Helvetica, Arial sans-serif;
-$arial: Arial, Helvetica, sans-serif;
-$lucida-sans: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-$tahoma: Tahoma, Geneva, sans-serif;
-$trebuchet: "Trebuchet MS", Helvetica, sans-serif;
-$verdana: Verdana, Geneva, sans-serif;
+// Some web-safe fonts library
 
-$courier: Courier, monospace;
-$courier-new: "Courier New", Courier, monospace;
-$lucida-console: "Lucida Console", Monaco, monospace;
+// Current system's font (see https://css-tricks.com/snippets/css/system-font-stack/)
+$system: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 
-$palatino: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-$times-new-roman: "Times New Roman", Times, Georgia, serif;
-$times: "Times New Roman", Times, Georgia, serif;
-$georgia: Georgia, serif;
+// Set of stacks from https://css-tricks.com/snippets/css/font-stacks/
+// They take the name of the most common type on the series
 
-// Custom fonts
-$krub: 'Krub', $helvetica;
-$merriweather: 'Merriweather', $georgia;
+$times: Cambria, "Hoefler Text", Utopia, "Liberation Serif", "Nimbus Roman No9 L Regular", Times, "Times New Roman", serif;
+$georgia: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+$garamond: "Palatino Linotype", Palatino, Palladio, "URW Palladio L", "Book Antiqua", Baskerville, "Bookman Old Style", "Bitstream Charter", "Nimbus Roman No9 L", Garamond, "Apple Garamond", "ITC Garamond Narrow", "New Century Schoolbook", "Century Schoolbook", "Century Schoolbook L", Georgia, serif;
 
-$fira-sans: 'Fira Sans', $helvetica;
-$lato: 'Lato', $helvetica;
+$helvetica: Frutiger, "Frutiger Linotype", Univers, Calibri, "Gill Sans", "Gill Sans MT", "Myriad Pro", Myriad, "DejaVu Sans Condensed", "Liberation Sans", "Nimbus Sans L", Tahoma, Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
+$verdana: Corbel, "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", "Bitstream Vera Sans", "Liberation Sans", Verdana, "Verdana Ref", sans-serif;
+$trebuchet: "Segoe UI", Candara, "Bitstream Vera Sans", "DejaVu Sans", "Bitstream Vera Sans", "Trebuchet MS", Verdana, "Verdana Ref", sans-serif;
 
-$vt323 : 'VT323', monospace;
-$inconsolata: 'Inconsolata', monospace;
+$impact: Impact, Haettenschweiler, "Franklin Gothic Bold", Charcoal, "Helvetica Inserat", "Bitstream Vera Sans Bold", "Arial Black", sans-serif;
+$courier: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
 
-
+// Add here your custom fonts, if needed
 
 
 // Global variables. It is good practice (performance & design) to only use one or two typefaces.
-$font-main: $lato;
-$font-secondary: $fira-sans;
-$font-monospace: $inconsolata;
+$font-main: $system;
+$font-secondary: $trebuchet;
+$font-monospace: $courier;
 
-// Custom values for bold and light allow for more precise mapping
-$bold: 700;
-$font-main-bold: 700;
-$font-secondary-bold: 800;
-$light: light;
-$normal: 300;
+// Setting custom values for bold and light (100, 500, etc) allow for more precise mapping
+// Don't touch the settings to keep them by default.
+$font-main-bold: bold;
+$font-secondary-bold: bold;
+$light: lighter;
+$normal: normal;
 
 // List of all elements which use $font-secondary.
 $font-secondary-items:
@@ -242,7 +141,9 @@ $figcaption-align: left;
 
 // Quotes
 // Here are some common quotes: “ ” ‘ ’ ‛ ‟ ‚ „ ' " ‹ › « »
-$quotes: "“" "”" "‘" "’";
+// Latin quotes (spanish, french): "«" "»" "“" "”"
+// English quotes: "“" "”" "‘" "’"
+$quotes: "«" "»" "“" "”";
 
 // Code-like items
 $code-background: get-color(base, separator);
@@ -311,8 +212,6 @@ $table-padding: $spacer / 2;
 $table-th-align: left;
 
 $blockquote-whitespace: $spacer * 2;
-$blockquote-decoration: '*';
-$blockquote-decoration-size: $h2-font-size;
 $blockquote-font: $font-secondary;
 
 $shadows: true;
@@ -328,18 +227,21 @@ $shadow-definition: 2px 2px 2px 0px rgba($black, 0.1);
 // There are four link strategies available.
 // ------
 
-$link-strategy: underline; // Alternatives: underline, border, smart, mark, false
-$link-highlight-on-hover: false; // "false" highlights the link before :hover
-
 // Only for $link-strategy:border
-$link-border-color: $violet2;
-$link-border-width: ritmo(0.5);
+$link-border-color: $violet1;
+$link-border-color-hover: $violet2; // You can set a different color on :hover
+$link-border-width: ritmo(1);
 
 // Only for $link-strategy:mark
-$link-mark-color: $violet2;
+$link-mark-color: $violet1;
+$link-mark-color-hover: $violet2;
+$link-mark-padding: 4px;
 
-// Only for $link-strategy:smart
-$link-smart-background: $violet2;
+// Only for $link-strategy:border-inset
+$link-border-inset-color: $violet1;
+$link-border-inset-color-hover: $violet1;
+$link-border-inset-width: 0.3rem;
+$link-border-inset-width-hover: 1rem;
 
 // Link colors
 $link-color: $violet7;
@@ -347,11 +249,37 @@ $link-visited: $violet7;
 $link-hover: $violet5;
 $link-active: $violet5;
 
-// Inverse link colors (for contrasted backgrounds)
+// BUILD YOUR OWN LINK
+// You can choose one strategy for every state!
+//
+// Available strategies: 
+// - false - No styling
+// - underline - Normal, text-decoration:underline
+// - border - Border-bottom with custom width
+// - border-inset - Pseudo-element that fakes a border bottom that grows from bottom to top
+// - mark - Background-color (as in a <mark> element)
+//
+$link-strategy-default: 'border-inset';
+$link-strategy-hover: 'border-inset';
+
+$link-alternative-strategies: false;
+
+// Example of $link-alternative-strategies:
+//
+// $link-alternative-strategies: (
+// 	mark : (
+// 		default : 'mark', 
+// 		hover : 'mark'
+// 	),
+// );
+
+// Inverse link colors and strategy (for contrasted backgrounds)
 $inverse-link-color: $white;
 $inverse-link-visited: $white;
 $inverse-link-hover: $blue2;
 $inverse-link-active: $blue2;
+$inverse-link-strategy-default:'underline';
+$inverse-link-strategy-hover: false;
 
 
 
@@ -360,41 +288,71 @@ $inverse-link-active: $blue2;
 // FORMS
 // ------
 
-// General reset
+// Global variables
 $form-border-radius: $border-radius;
 
 // Inputs
 $input-border-strategy: full; // Options: full, bottom, none;
-$input-border-color: get-color(gray, "2");
+$input-border-color: $gray2;
 $input-border: 1px solid $input-border-color;
 $input-padding: $spacer / 4 $spacer / 2;
 
 // Buttons
 $button-font-family: $font-main;
-$button-strategy: 'border'; // Options: border, background
-$button-strategy-border: 'fill'; // Only if $button-strategy = border. Options: fill, highlight
-$button-color: $gray8;
 $button-border-width: 2px;
-$button-border: $button-border-width solid $button-color;
 $button-padding: 0 ($spacer / 2);
 $button-border-radius: 2px; // $border-radius;
-$button-weight: $bold;
+$button-weight: bold(button);
 $button-invert-color: false; // ONly valid on border:fill and background
+
+// BUILD YOUR OWN BUTTON
+// You can choose one strategy for every state!
+//
+// Available strategies: 
+// - outline - Colored outline and text, background transparent
+// - background - Background solid, font contrasted.
+// - split - Background colored dim, font colored dark, based on same color
+// - split-inverse - Inverse of split
+//
+// Note that background and outline can be considered "inverse" of each other
+$button-strategy-default: 'split';
+$button-strategy-hover: 'split-inverse';
+
+$button-alternative-strategies: false;
+
+//
+// Example of $button-alternative-strategies:
+//
+// $button-alternative-strategies: (
+// 	split : (
+// 		default : 'split', 
+// 		hover : 'split-inverse'
+// 	),
+// );
+
+
+$button-states : (
+	primary: get-color(base, primary), 
+	secondary: get-color(base, secondary), 
+	success: get-color(state, success), 
+	warning: get-color(state, warning),  
+	error: get-color(state, error), 
+);
 
 // Checkboxes / Selects
 $pseudo-checkbox : false;
 $pseudo-radio: false;
-$pseudo-border-color: get-color(text, primary);
+$pseudo-border-color: $gray8;
 $pseudo-border: 1px solid $pseudo-border-color;
 
 // Selects
 $select-border-strategy: full; // Options: full, bottom, none;
-$select-border-color: shade(get-color(gray, "5"), 25%);
+$select-border-color: shade($gray5, 25%);
 $select-border: 1px solid $input-border-color;
 $select-padding: 0 ($spacer / 2);
 
 // Browser quirks
-$webkit-autofill-color: get-color(gray, "5"); // When webkit fills the fields whith your stored data.
+$webkit-autofill-color: $gray5; // When webkit fills the fields whith your stored data.
 
 // Fieldsets
 $disable-fieldset: false;
@@ -507,78 +465,4 @@ $card-padding: $gutter * 2;
 // Project-specific variables
 // ------
 
-
-
-// ------
-// KSS-NODE
-// This is to be parsed with KSS-Node and assign custom weight to elements
-// ------
-
-// Color
-//
-// Weight: 1
-//
-// Styleguide Color
-
-// Base
-//
-// Weight: 2
-//
-// Styleguide Base
-
-// Typography
-//
-// Weight: 3
-//
-// Styleguide Typography
-
-// Components
-//
-// Weight: 4
-//
-// Styleguide Components
-
-// Layout
-//
-// Weight: 5
-//
-// Styleguide Layout
-
-// Forms
-//
-// Weight: 6
-//
-// Styleguide Forms
-
-// Helpers
-//
-// Weight: 7
-//
-// Styleguide Helpers
-
-// Mixins
-//
-// Weight: 8
-//
-// Styleguide Mixins
-
-// Functions
-//
-// Weight: 9
-//
-// Styleguide Functions
-
-// Pseudo-elements
-//
-// Weight: 10
-//
-// Styleguide Pseudo-elements
-
-// Huesitos
-//
-// Provide quick helper classes for common cases (like adding margin, padding or borders)
-//
-// Weight: 11
-//
-// Styleguide Huesitos
 
