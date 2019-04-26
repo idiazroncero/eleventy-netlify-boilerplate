@@ -1,6 +1,6 @@
 const { DateTime } = require("luxon");
 const CleanCSS = require("clean-css");
-const UglifyJS = require("uglify-js");
+const UglifyJS = require("uglify-es");
 const htmlmin = require("html-minifier");
 const showdown = require('showdown');
 const converter = new showdown.Converter();
@@ -46,7 +46,6 @@ const relativeSourceDir = '/public/images';
 const responsiveSizes = ['large', 'medium', 'small'];
 
 module.exports = function(eleventyConfig) {
-
   eleventyConfig.addLayoutAlias("post", "layouts/post.njk");
 
   // Date formatting (human readable)
@@ -120,7 +119,7 @@ module.exports = function(eleventyConfig) {
   // Minify JS
   eleventyConfig.addFilter("jsmin", function(code) {
     let minified = UglifyJS.minify(code);
-    if( minified.error ) {
+    if (minified.error) {
       console.log("UglifyJS error: ", minified.error);
       return code;
     }
@@ -129,7 +128,7 @@ module.exports = function(eleventyConfig) {
 
   // Minify HTML output
   eleventyConfig.addTransform("htmlmin", function(content, outputPath) {
-    if( outputPath.indexOf(".html") > -1 ) {
+    if (outputPath.indexOf(".html") > -1) {
       let minified = htmlmin.minify(content, {
         useShortDoctype: true,
         removeComments: true,
@@ -154,23 +153,22 @@ module.exports = function(eleventyConfig) {
 
   /* Markdown Plugins */
   let markdownIt = require("markdown-it");
+  let markdownItAnchor = require("markdown-it-anchor");
   let options = {
     html: true,
     breaks: true,
     linkify: true
   };
   let opts = {
-    permalink: true,
-    permalinkClass: "direct-link",
-    permalinkSymbol: "#"
+    permalink: false
   };
 
+  eleventyConfig.setLibrary("md", markdownIt(options)
+    .use(markdownItAnchor, opts)
+  );
+
   return {
-    templateFormats: [
-      "md",
-      "njk",
-      "html"
-    ],
+    templateFormats: ["md", "njk", "html", "liquid"],
 
     // If your site lives in a different subdirectory, change this.
     // Leading or trailing slashes are all normalized away, so don’t worry about it.
