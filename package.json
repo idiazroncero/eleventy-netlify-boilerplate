@@ -1,18 +1,22 @@
 {
   "name": "eleventy-netlify-cms",
   "version": "0.1.1",
-  "description": "Custom solution for a static site generator using Netlify CMS based on danurbanowicz/eleventy-netlify-boilerplate.",
+  "description": "Custom solution for a static site generator using Netlify CMS based on danurbanowicz/eleventy-netlify-boilerplate and huesos",
   "scripts": {
     "postinstall": "patch-package",
-    "build": "yarn gulp build",
-    "watch": "yarn eleventy --watch",
+    "build": "yarn css:prod; yarn css:post; yarn images; yarn eleventy",
+    "build:noimg": "yarn css:prod; yarn css:post; yarn eleventy",
+    "watch": "yarn concurrently \"yarn eleventy --watch\" \"yarn css:watch\" ",
     "serve": "yarn eleventy --serve",
     "debug": "DEBUG=* yarn eleventy",
-    "sass": "yarn node-sass src/assets/scss/style.scss src/assets/css/style.css --source-map=true",
-    "sass:prod": "yarn node-sass src/assets/scss/style.scss src/assets/css/style.css --output-style=compressed",
-    "sass:watch": "yarn node-sass src/assets/scss/style.scss src/assets/css/style.css -w",
-    "sass:styleguide": "yarn node-sass src/assets/scss/style.scss src/assets/css/styleguide/styleguide.css --source-comments=true --output-style=expanded",
-    "styleguide": "yarn sass:styleguide; yarn kss --source src/assets/css/styleguide --destination docs --css ../src/assets/css/styleguide/styleguide.css --builder node_modules/huesos/src/kss-src"
+    "images": "yarn gulp processImages",
+    "images:clean": "yarn gulp cleanImages",
+    "images:resize": "yarn gulp resizeImages",
+    "images:minify": "yarn gulp minifyImages",
+    "css": "yarn node-sass src/assets/scss/style.scss src/assets/css/style.css --source-map=true",
+    "css:prod": "yarn node-sass src/assets/scss/style.scss src/assets/css/style.css --output-style=compressed",
+    "css:watch": "yarn node-sass src/assets/scss/style.scss src/assets/css/style.css -w",
+    "css:post": "yarn postcss src/assets/css/style.css -o src/assets/css/style.css --no-map"
   },
   "repository": {
     "type": "git",
@@ -27,6 +31,7 @@
   "devDependencies": {
     "@11ty/eleventy": "^0.5.0",
     "clean-css": "^4.1.11",
+    "concurrently": "^4.1.0",
     "del": "^3.0.0",
     "directory-tree": "^2.2.1",
     "gulp": "^4.0.0",
@@ -45,12 +50,16 @@
     "node-sass": "^4.9.3",
     "patch-package": "^6.1.0",
     "postcss": "^7.0.2",
-    "postcss-cssnext": "^3.1.0",
+    "postcss-preset-env": "^6.6.0",
     "postinstall-postinstall": "^2.0.0",
     "sass": "^1.13.4",
     "sharp": "^0.22.0",
     "showdown": "^1.9.0",
     "uglify-es": "^3.3.9",
     "uglify-js": "^3.4.5"
+  },
+  "dependencies": {
+    "postcss-cli": "^6.1.2",
+    "stylelint": "^10.0.1"
   }
 }

@@ -3,8 +3,14 @@ layout: layouts/base.njk
 section: home
 ---
 
-<div class="mb">
-    {{ 'medium/test.jpg' | image | safe }}
-</div>
-
 {{ layoutContent | safe }}
+
+<section>
+    <h3>Image filter</h3>
+    {{ 'small/test.jpg' | image | safe }}
+</section>
+<section>
+    <h3>Picture filter</h3>
+    {{ 'test.jpg' | picture | safe }}
+</section>
+

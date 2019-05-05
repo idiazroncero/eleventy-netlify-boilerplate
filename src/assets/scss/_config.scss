@@ -17,7 +17,7 @@ $colors: (
 
 	text: (
 		"primary":   $gray9,
-		"heading":   $indigo9,
+		"heading":   $blue9,
 		"mark" : $orange5,
 	),
 
@@ -31,7 +31,8 @@ $colors: (
 		"muted":   $gray9,
 		"success": $teal4,
 		"warning": $yellow5,
-		"error":   $red5
+		"error":   $red5,
+		"caca": limegreen,
 	)
 ) !default;
 
@@ -48,8 +49,8 @@ $contrast-light: #FFFFFF;
 $color-modify-ratio: 33%;
 
 // Darken and lighten % to apply to split-color operations
-$darken-split-ratio: 50%;
-$lighten-split-ratio: 70%;
+$darken-split-ratio: 70%;
+$lighten-split-ratio: 40%;
 
 // Lightness threshold for color invertion. A value between 0-100.
 $lightness-threshold: 60;
@@ -131,7 +132,7 @@ $font-secondary-items:
 
 // Heading overrides
 // Select a font weight and an alternate line height for your headings
-$heading-font-weight: normal;
+$heading-font-weight: bold;
 $heading-vertical-rhythm:1; // We might want a slower VR for headings. Set to false if not.
 $heading-letter-spacing: -0.03em; // Headings benefit of a reduced letter-spacing 
 
@@ -146,7 +147,7 @@ $figcaption-align: left;
 $quotes: "«" "»" "“" "”";
 
 // Code-like items
-$code-background: get-color(base, separator);
+$code-background: get-color(text, heading);
 $code-border-radius: 2px;
 
 // Letter-spacing (always EM units to keep it relative to the element scope)
@@ -238,16 +239,16 @@ $link-mark-color-hover: $violet2;
 $link-mark-padding: 4px;
 
 // Only for $link-strategy:border-inset
-$link-border-inset-color: $violet1;
-$link-border-inset-color-hover: $violet1;
-$link-border-inset-width: 0.3rem;
-$link-border-inset-width-hover: 1rem;
+$link-border-inset-color: $fuschia1;
+$link-border-inset-color-hover: $fuschia1;
+$link-border-inset-width: 0.33em;
+$link-border-inset-width-hover: 0.66em;
 
 // Link colors
-$link-color: $violet7;
-$link-visited: $violet7;
-$link-hover: $violet5;
-$link-active: $violet5;
+$link-color: $red8;
+$link-visited: $red8;
+$link-hover: $fuschia6;
+$link-active: $red8;
 
 // BUILD YOUR OWN LINK
 // You can choose one strategy for every state!
@@ -363,8 +364,9 @@ $disable-fieldset: false;
 // Default menu appearance
 // ------
 
-$nav-font-weight: bold;
+$nav-font-weight: normal;
 $nav-uppercase: true;
+$nav-kill-links: true;
 $nav-font-size: $base-font-size;
 $nav-spacing: $letter-spacing;
 
@@ -372,9 +374,35 @@ $toc-font-weight: bold;
 $toc-uppercase: false;
 $toc-font-size: $h5-font-size;
 
-$menu-padding: $spacer / 2;
-$menu-kill-links: true;
-$menu-background-color: get-color(base, secondary);
+$menu-padding: $spacer / 3 $spacer / 2;
+$menu-kill-links: true; // Kills decoration
+$menu-background-color: $gray4;
+$menu-color-ratio: 5%;
+
+$breadcrumb-kill-links: true; // Kills decoration
+$breadcrumb-font-size: $h6-font-size; // False avoids setting this value
+$breadcrumb-arrow: "›"; // Valid unicode character
+
+// ------
+// TAGS
+// ------
+
+$tag-strategy: 'contrast'; // One of split or contrast
+$tag-default-color: $gray3;
+
+// ------
+// ALERTS
+// ------
+
+$alert-strategy: 'split'; // One of split or contrast
+$alert-default-color: $gray3;
+
+// ------
+// GRID
+// We asume a centered, responsive and max-width limited viewport.
+// ------
+
+$max-grid-cols: 6;
 
 
 // ------
@@ -384,6 +412,14 @@ $menu-background-color: get-color(base, secondary);
 
 $max-width: 960px;
 $layout-align: center; // left, right
+$layout-padding: $spacer;
+
+
+// ------
+// HUESITOS
+// Wether to generate utility classes or not
+// ------
+$huesitos: true;
 
 
 

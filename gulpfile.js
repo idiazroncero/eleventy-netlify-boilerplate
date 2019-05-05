@@ -1,50 +1,12 @@
 'use strict';
 
 // Import and setup
-const {dest, src, series, parallel, watch} = require('gulp');
-const sass = require('gulp-sass');
-const shell = require('child_process').exec;
-const sourcemaps = require('gulp-sourcemaps');
+const {dest, src, series } = require('gulp');
 const imagemin = require('gulp-imagemin');
 const webp = require('gulp-webp');
 const responsive = require('gulp-responsive');
 const del = require('del');
-sass.compiler = require('node-sass');
-
-// CSS/SASS Compilation
-function compileSass() {
-  return src('./src/assets/scss/style.scss')
-    .pipe(sourcemaps.init())
-    .pipe(sass().on('error', sass.logError))
-    .pipe(sourcemaps.write())
-    .pipe(dest('./src/assets/css'));
-};
-
-function watchSass() {
-  return watch('./src/assets/scss/**/*.scss', compileSass );
-};
-
-
-// KSS Styleguide
-function compileStyleguideSass() {
-    return src('./src/assets/scss/style.scss')
-        .pipe(sourcemaps.init())
-        .pipe(sass({
-            sourceComments: true,
-            outputStype: 'expanded'
-        }).on('error', sass.logError))
-        .pipe(sourcemaps.write())
-        .pipe(dest('./src/assets/css/styleguide/')); 
-}
-
-function compileStyleguide(cb) {
-    shell('yarn kss --source src/assets/css/styleguide --destination docs --css ../src/assets/css/styleguide/styleguide.css --builder node_modules/huesos/src/kss-src', function(err, stdout, stderr) {
-        console.log(stdout);
-        console.log(stderr);
-        cb(err);
-    })
-}
-
+const { sizes, sizeNames, sourceDir } = require('./images.config'); 
 
 // Image optimization, resizing, etc
 function minifyImages() {
@@ -54,84 +16,55 @@ function minifyImages() {
 		.pipe(dest('src/public/images'))
 };
 
+// Deleting all generated images
+const imageDirs = sizeNames.map(function(item){
+    return sourceDir + `/**/${item}`;
+})
+
 function cleanImages() {
     return del([
         'src/public/images/**/*.webp',
-        'src/public/images/**/small',
-        'src/public/images/**/medium',
-        'src/public/images/**/large',
-        'src/public/images/**/thumb',
+        ...imageDirs
     ])
 };
 
+// Get the image sizes config and generate appropiate styles
+var responsiveImages = sizes.map(function(item){
+    var object = {
+        width: item.width,
+        rename: function(path) {
+            path.dirname += `/${item.name}`;
+            return path;
+        }
+    }
+    if(item.height) {
+        object.height = item.height;
+    }
+    return object;
+});
+
+var responsiveImages2x = sizes.map(function(item){
+    var object = {
+        width: item.width * 2,
+        rename: function(path) {
+            path.dirname += `/${item.name}`;
+            path.basename += '@2x';
+            return path;
+        }
+    }
+    if(item.height) {
+        object.height = item.height * 2;
+    }
+    return object;
+});
+
+var responsiveImagesArray = [ ...responsiveImages, ...responsiveImages2x ];
+
 function resizeImages() {
     return src('src/public/images/**/*.{png,jpg,webp}')
-        .pipe(responsive({
-            '**/*.{png,jpg,webp}': 
-                [
-                    {
-                        width: 150,
-                        height: 150,
-                        rename: function(path) {
-                            path.dirname += "/thumb";
-                            return path;
-                        }
-                    },
-                    {
-                        width: 150 * 2,
-                        height: 150 * 2,
-                        rename: function(path) {
-                            path.dirname += "/thumb";
-                            path.basename += '@2x';
-                            return path;
-                        }
-                    },
-                    {
-                        width: 480,
-                        rename: function(path) {
-                            path.dirname += "/small";
-                            return path;
-                        }
-                    },
-                    {
-                        width: 480 * 2,
-                        rename: function(path) {
-                            path.dirname += "/small";
-                            path.basename += '@2x';
-                            return path;
-                        }
-                    },
-                    {
-                        width: 800,
-                        rename: function(path) {
-                            path.dirname += "/medium";
-                            return path;
-                        }
-                    },
-                    {
-                        width: 800 * 2,
-                        rename: function(path) {
-                            path.dirname += "/medium";
-                            path.basename += '@2x';
-                            return path;
-                        }
-                    },
-                    {
-                        width: 1400,
-                        rename: function(path) {
-                            path.dirname += "/large";
-                            return path;
-                        }
-                    },
-                    {
-                        width: 1400 * 2,
-                        rename: function(path) {
-                            path.dirname += "/large";
-                            path.basename += '@2x';
-                            return path;
-                        }
-                    },
-                ] // End **/*.{png,jpg,webp}
+        .pipe(responsive(
+            {
+                '**/*.{png,jpg,webp}': responsiveImagesArray
             },
             // Globals
             {  
@@ -146,34 +79,12 @@ function resizeImages() {
         .pipe(dest('src/public/images'));
 }
 
-// Validators
-
-
-// Build Helpers
-function runEleventy(cb) {
-    shell('yarn eleventy', function(err, stdout, stderr) {
-        console.log(stdout);
-        console.log(stderr);
-        cb(err);
-    })
-}
-
 
 
 // Define publicly available tasks
-exports.sass = compileSass;
-exports.sassWatch = watchSass;
-exports.minifyImages = minifyImages;
-exports.resizeImages = resizeImages;
 exports.cleanImages = cleanImages;
+exports.resizeImages = resizeImages;
+exports.minifyImages = minifyImages;
 
 // Grouped tasks
-exports.styleguide =  series(compileStyleguideSass, compileStyleguide)
-exports.fullStyleguide = series(compileStyleguideSass, compileStyleguide);
 exports.processImages = series(cleanImages, resizeImages, minifyImages);
-
-// Main build process. Respect the order!
-exports.build = series(
-    series(cleanImages, resizeImages, minifyImages),
-    runEleventy
-)

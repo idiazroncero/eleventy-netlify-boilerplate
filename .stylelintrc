@@ -1,0 +1,19 @@
+{
+  "rules": {
+    "color-no-invalid-hex" : true,
+    "function-linear-gradient-no-nonstandard-direction" : true,
+    "unit-no-unknown" : true,
+#   "property-no-unknown": true,
+    "declaration-block-no-shorthand-property-overrides" : true,
+    "block-no-empty": true,
+    "selector-pseudo-class-no-unknown" : true,
+    "selector-pseudo-element-no-unknown" : true,
+    "selector-type-no-unknown" : true,
+    "media-feature-name-no-unknown" : true,
+    "no-extra-semicolons" : true,
+#   "declaration-no-important" : true,
+    "max-nesting-depth" : 3,
+#   "color-hex-case" : "upper",
+#   "indentation": "tab"
+  }
+}
