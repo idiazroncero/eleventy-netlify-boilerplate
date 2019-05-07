@@ -24,7 +24,6 @@ module.exports = function(eleventyConfig) {
     return html;
   });
 
-
   eleventyConfig.addFilter("picture", pictureFilter );
   eleventyConfig.addFilter("image", imageFilter );
 

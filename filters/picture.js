@@ -4,14 +4,23 @@ const filePaths = require('./filePaths');
 function pictureLFS (sourceFile){
     var paths = sizes.map(item => {
         const isResponsive = item.isResponsive;
-        if(isResponsive) {
+        const customQuery = item.customQuery;
+        if(isResponsive && !customQuery) {
             var height = item.height ? `&h=${item.height}` : '';
             var height2x = item.height ? `&h=${item.height * 2}` : '';
             return {
                     path : `${relativeSourceDir}/${sourceFile}?nf_resize=${nf_resize}&w=${item.width}${height}`,
                     path2x : `${relativeSourceDir}/${sourceFile}?nf_resize=${nf_resize}&w=${item.width * 2 }${height2x}`,
-                    width : item.width
+                    width : item.width,
+                    width2x : item.width * 2
                 }
+        } else if(isResponsive && customQuery) {
+            return {
+                path : `${relativeSourceDir}/${sourceFile}?nf_resize=${customQuery.path}`,
+                path2x : `${relativeSourceDir}/${sourceFile}?nf_resize=${customQuery.path2x}`,
+                width : customQuery.width,
+                width2x : customQuery.width2x
+            }
         } else {
             return false;
         }
@@ -24,7 +33,7 @@ function pictureLFS (sourceFile){
     });
 
     var srcset2x = paths.map(item => {
-        return item.path2x + ' ' + (item.width * 2) + 'w';
+        return item.path2x + ' ' + item.width2x + 'w';
     });
 
     var srcsetString = [...srcset, ...srcset2x].join(',');

@@ -1,16 +1,24 @@
 const config =  {
+    // Common
+    sourceDir : './src/public/images',
+    relativeSourceDir : '/public/images',
     // Set to true to use LFS
     lfs : true,
     // If lfs = true;
     nf_resize: 'smartcrop',
-    sourceDir : './src/public/images',
-    relativeSourceDir : '/public/images',
+    // Array of size objects
     sizes : [
         {
             name: 'large',
             width: 1400,
             height: false,
-            isResponsive: true
+            isResponsive: true,
+            customQuery: {
+                width: 300,
+                path: 'fit&w=300&h=300', 
+                width2x: 600,
+                path2x: 'fit&w=600&h=600'
+            }
         },
         {
             name: 'medium',

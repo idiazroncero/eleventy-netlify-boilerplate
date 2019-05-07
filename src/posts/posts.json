@@ -2,5 +2,6 @@
   "layout": "pages/post.njk",
   "permalink": "posts/{{ title | slug }}/index.html",
   "tags": "post",
-  "section": "post"
+  "section": "post",
+  "titleStatus": false
 }
