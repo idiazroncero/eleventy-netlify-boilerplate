@@ -4,8 +4,7 @@
   "description": "Custom solution for a static site generator using Netlify CMS based on danurbanowicz/eleventy-netlify-boilerplate and huesos",
   "scripts": {
     "postinstall": "patch-package",
-    "build": "yarn css:prod; yarn css:post; yarn images; yarn eleventy",
-    "build:noimg": "yarn css:prod; yarn css:post; yarn eleventy",
+    "build": "sh scripts/build.sh",
     "watch": "yarn concurrently \"yarn eleventy --watch\" \"yarn css:watch\" ",
     "serve": "yarn eleventy --serve",
     "debug": "DEBUG=* yarn eleventy",

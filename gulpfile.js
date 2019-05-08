@@ -6,12 +6,18 @@ const imagemin = require('gulp-imagemin');
 const webp = require('gulp-webp');
 const responsive = require('gulp-responsive');
 const del = require('del');
-const { sizes, sizeNames, sourceDir } = require('./images.config'); 
+const { lfs, sizes, sizeNames, sourceDir } = require('./images.config'); 
+var processImages;
 
 // Image optimization, resizing, etc
 function minifyImages() {
     return src('src/public/images/**/*')
         .pipe(imagemin())
+		.pipe(dest('src/public/images'))
+};
+
+function createWebp() {
+    return src('src/public/images/**/*')
         .pipe(webp())
 		.pipe(dest('src/public/images'))
 };
@@ -85,6 +91,15 @@ function resizeImages() {
 exports.cleanImages = cleanImages;
 exports.resizeImages = resizeImages;
 exports.minifyImages = minifyImages;
+exports.createWebp = createWebp;
+
+// Set the correct processImages task
+
+if(lfs) {
+    processImages = series(cleanImages, minifyImages);
+} else {
+    processImages = series(cleanImages, resizeImages, createWebp, minifyImages);
+}
 
 // Grouped tasks
-exports.processImages = series(cleanImages, resizeImages, minifyImages);
+exports.processImages = processImages;

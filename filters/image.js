@@ -1,6 +1,15 @@
-const { relativeSourceDir } = require('../images.config'); 
+const { lfs, nf_resize, relativeSourceDir } = require('../images.config'); 
 
-module.exports = function(sourceFile){
+
+function imageLFS(sourceFile, query){
+  if(query) {
+    var actualQuery = `?nf_resize=${nf_resize}&${query}`;
+  }
+  return `<img src="${ relativeSourceDir + '/' + sourceFile }${ actualQuery }" />`
+}
+
+
+function image(sourceFile){
   var sourcePointSplit = sourceFile.split('.')
   var webp =  sourcePointSplit[0] + '.webp';
   return `<picture>
@@ -9,3 +18,6 @@ module.exports = function(sourceFile){
             <img src="${ relativeSourceDir + '/' + sourceFile }" />
           </picture>`
 }
+
+
+module.exports = lfs ? imageLFS : image;
