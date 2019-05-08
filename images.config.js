@@ -5,7 +5,7 @@ const config =  {
     // Set to true to use LFS
     lfs : true,
     // If lfs = true;
-    nf_resize: 'smartcrop',
+    nf_resize: 'fit',
     // Array of size objects
     sizes : [
         {
