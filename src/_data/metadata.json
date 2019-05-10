@@ -1,10 +1,16 @@
 {
+  "sitename": "Eleventy Netlify CMS",
   "title": "Eleventy Netlify CMS",
   "url": "https://eleventy-netlify-cms.netlify.com",
+  "pwa" : true,
   "author": {
     "name": "Ignacio Díaz-Roncero",
     "email": "idiaz.roncero@gmail.com",
     "github": "https://github.com/idiazroncero"
   },
-  "debug" : true
+  "debug" : true,
+  "metatags" : {
+    "description" : "The description of the page",
+    "rrssImage" : "/assets/img/rrss.png"
+  }
 }

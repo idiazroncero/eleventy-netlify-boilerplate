@@ -1,0 +1,25 @@
+{% set customMetatags = metatags %}
+{% set globalMetatags = metadata.metatags %}
+
+{% set metaTitle = customMetatags.title or title or metadata.title %}
+{% set metaDescription = customMetatags.description or globalMetatags.description %}
+{% set metaImage = customMetatags.rrssImage or globalMetatags.rrssImage %}
+
+<!-- Primary Meta Tags -->
+<title>{{ metaTitle }} | {{ metadata.sitename }}</title>
+<meta name="title" content="{{ metaTitle }} | {{ metadata.sitename }}">
+<meta name="description" content="{{ metaDescription }}">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ metadata.url }}">
+<meta property="og:title" content="{{ metaTitle }} | {{ metadata.sitename }}">
+<meta property="og:description" content="{{ metaDescription }}">
+<meta property="og:image" content="{{ metaImage }}">
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="{{ metadata.url }}">
+<meta property="twitter:title" content="{{ metaTitle }} | {{ metadata.sitename }}">
+<meta property="twitter:description" content="{{ metaDescription }}">
+<meta property="twitter:image" content="{{ metaImage }}">

@@ -80,7 +80,6 @@ Netlify provides support for [large media](https://www.netlify.com/docs/large-me
 
 - Add metadata on _head.njk and a way to config it on metadata.json
 - Betterment of LFS handling
-- Use service workers / PWA for performance by default
-- ¿inline critical css?
 - Link preload/etc
+- Multiple favicon / color on android customization
 

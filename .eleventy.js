@@ -6,6 +6,7 @@ const showdown = require('showdown');
 const converter = new showdown.Converter();
 const pictureFilter = require('./filters/picture');
 const imageFilter = require('./filters/image');
+const pluginPWA = require("eleventy-plugin-pwa");
 
 //
 // CONFIG
@@ -71,6 +72,10 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy("src/admin");
   eleventyConfig.addPassthroughCopy("src/public");
+
+
+  // Plugins
+  eleventyConfig.addPlugin(pluginPWA);
 
   /* Markdown Plugins */
   let markdownIt = require("markdown-it");

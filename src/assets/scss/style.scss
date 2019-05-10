@@ -1,3 +1,10 @@
 @import "../../../node_modules/huesos/dependencies";
 @import "config";
 @import "../../../node_modules/huesos/huesos";
+
+/* critical:start */
+
+.home {
+    background-color: red;
+}
+/* critical:end */
