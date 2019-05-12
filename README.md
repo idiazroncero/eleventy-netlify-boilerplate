@@ -15,6 +15,41 @@ For the front-end, it depends on [huesos](https://www.npmjs.com/package/huesos),
 
 ## Image assets
 
+Image handling is one of the biggest issues on static site generators. Without a live server-side tools like Imagick, the usual transform/crop/resize become a problem.
+
+This project stores all image assets that will need operations on `src/public` and exposes a `images.config.js` config file to decide which strategy to follow (lfs true or false) and how many crops are needed.
+
+This is a sample `images.config.js`:
+
+```
+{
+    sourceDir : './src/public/images', // The original source of the assets
+    relativeSourceDir : '/public/images', // The real, final path
+    lfs : true, // Wether to use lfs or not 
+    nf_resize: 'fit', // If LFS is true, which resize algorithm to use
+    sizes : [ // An array of sizes
+        {
+            name: 'large', // Name of the size, will be the destination sub-folder
+            width: 1400, // The image width
+            height: false, // The image height, or false to auto-calculate it
+            isResponsive: true, // Should this image be used on the <picture> responsive element
+            customQuery: { // For LFS, an alernative, custom query
+                width: 300,
+                path: 'fit&w=300&h=300', 
+                width2x: 600,
+                path2x: 'fit&w=600&h=600'
+            }
+        }
+        {
+            name: 'icon',
+            width: 50,
+            height: 25,
+            isResponsive: false
+        },
+    ],
+}
+```
+
 ### Using gulp
 
 If your site is not heavy on images, you can use the `image` scripts in order to generate all the needed crops and resizes and `.webp` versions.
@@ -45,13 +80,13 @@ For non-responsive images, an img filter is also provided in order to output bot
 
 Netlify provides support for [large media](https://www.netlify.com/docs/large-media/) using git lfs.
 
+You can use the above mentioned `{{ picture }}` and `{{ image }}` filters safely: they will output queried URL's using Netlify's large media instead. This way, you can safely switch between lfs and non-lfs without having to rewrite your codebase. 
+
 
 
 ## Commands
 
-`yarn build` triggers a complete build of all the static and compiled assets.
-
-`yarn build:noimg` does the same, but without images. This is useful if you are hosting lots of images, can't allow the lengthy image build process and/or use a third-party solution (like Git LFS, Cloudinary, Uploadcare, etc).
+`yarn build` triggers a complete build of all the static and compiled assets. It will look at the `lfs` value of `images.config.js` to decide wether to perform image conversions.
 
 `yarn watch` starts the watch process for both Eleventy and sass.
 
@@ -74,6 +109,8 @@ Netlify provides support for [large media](https://www.netlify.com/docs/large-me
 `yarn images:resize` performs gulp resizeImages task, creating all the configured resizes and crops from the original images.
 
 `yarn images:minify` runs gulp minifyImages. Creates webp versions and minifies jpg and pnf files.
+
+`yarn pwa` and `yarn images:favicons` both run a gulp process that will generate all favicons needed and all the manifest files for service workers / search engines. Please note this command needs to be __manually__ run once on every favicon.jpg change because it is not part of the build process (in order to make it faster).
 
 
 ## TODO
