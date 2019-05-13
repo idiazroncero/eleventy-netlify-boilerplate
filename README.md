@@ -115,6 +115,6 @@ You can use the above mentioned `{{ picture }}` and `{{ image }}` filters safel
 
 ## TODO
 
-- Betterment of LFS handling
-- Link preload/etc
+- Rewrite LFS Query handling
+- Link preload/prefetch?
 
