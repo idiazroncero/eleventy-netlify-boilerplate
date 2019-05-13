@@ -3,7 +3,7 @@ const config =  {
     sourceDir : './src/public/images',
     relativeSourceDir : '/public/images',
     // Set to true to use LFS
-    lfs : true,
+    lfs : false,
     // If lfs = true;
     nf_resize: 'fit',
     // Array of size objects

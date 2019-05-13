@@ -80,6 +80,8 @@ For non-responsive images, an img filter is also provided in order to output bot
 
 Netlify provides support for [large media](https://www.netlify.com/docs/large-media/) using git lfs.
 
+You will need to set up Git LFS in order for Large Media to work. Follow the instructions on the official Netlify Docs. Do not ever try to fork/copy a repo with a initialized LFS/Large Media: it won't work.
+
 You can use the above mentioned `{{ picture }}` and `{{ image }}` filters safely: they will output queried URL's using Netlify's large media instead. This way, you can safely switch between lfs and non-lfs without having to rewrite your codebase. 
 
 
@@ -111,7 +113,6 @@ You can use the above mentioned `{{ picture }}` and `{{ image }}` filters safel
 `yarn images:minify` runs gulp minifyImages. Creates webp versions and minifies jpg and pnf files.
 
 `yarn pwa` and `yarn images:favicons` both run a gulp process that will generate all favicons needed and all the manifest files for service workers / search engines. Please note this command needs to be __manually__ run once on every favicon.jpg change because it is not part of the build process (in order to make it faster).
-
 
 ## TODO
 
