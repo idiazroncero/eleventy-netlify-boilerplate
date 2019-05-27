@@ -1,6 +1,6 @@
 {
   "name": "eleventy-netlify-cms",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Custom solution for a static site generator using Netlify CMS based on danurbanowicz/eleventy-netlify-boilerplate and huesos",
   "scripts": {
     "postinstall": "patch-package",
