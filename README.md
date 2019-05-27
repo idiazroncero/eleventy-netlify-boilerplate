@@ -13,11 +13,13 @@ It uses gulp for asset handling, especially image handling (resize / minify). Th
 
 For the front-end, it depends on [huesos](https://www.npmjs.com/package/huesos), a custom SCSS framework. The framework configuration overrides are handled on  `/src/assets/scss/_config.scss`.
 
+For JavaScript, it uses Parcel CLI without any further configuration. We intent to be able to write ES6 and `import` modules without having to configure a full-featured and unneded Webpack/SPA configuration, since we don't need most of Webpack's bells and whistles. Of course, you are free to ignore this and set your own JS toolbox.
+
 ## Image assets
 
 Image handling is one of the biggest issues on static site generators. Without a live server-side tools like Imagick, the usual transform/crop/resize become a problem.
 
-This project stores all image assets that will need operations on `src/public` and exposes a `images.config.js` config file to decide which strategy to follow (lfs true or false) and how many crops are needed.
+This project stores all image assets that will need operations on `src/public` and exposes a `images.config.js` config file to decide which strategy to follow (git `lfs` can be either true or false) and how many crops are needed.
 
 This is a sample `images.config.js`:
 
@@ -29,11 +31,11 @@ This is a sample `images.config.js`:
     nf_resize: 'fit', // If LFS is true, which resize algorithm to use
     sizes : [ // An array of sizes
         {
-            name: 'large', // Name of the size, will be the destination sub-folder
+            name: 'large', // Name of the size, will also be the destination sub-folder
             width: 1400, // The image width
             height: false, // The image height, or false to auto-calculate it
             isResponsive: true, // Should this image be used on the <picture> responsive element
-            customQuery: { // For LFS, an alernative, custom query
+            customQuery: { // Optionally, for LFS, a custom query to replace the default one
                 width: 300,
                 path: 'fit&w=300&h=300', 
                 width2x: 600,
@@ -66,7 +68,7 @@ To auto-generate all the markup needed for responsive images (we assume `100w` a
     {{ '/path/to/image/asset.png' | picture | safe }}
 ```
 
-We use `<picture>` instead of the leaner `<img srcset="" >` syntax in order to be able to use a `<srcset>` for `.webp`, a `.jpg` `<srcset>` fallback for less-capable browsers and finally a `<img>` tag for legacy browsers.
+We use `<picture>` instead of the leaner `<img srcset="" >` syntax in order to be able to use a `srcset` for `.webp`, a `.jpg srcset` fallback for less-capable browsers and finally a `<img>` tag for legacy browsers.
 
 Note that `safe` filter is needed in order to output HTML.
 
@@ -82,7 +84,7 @@ Netlify provides support for [large media](https://www.netlify.com/docs/large-me
 
 You will need to set up Git LFS in order for Large Media to work. Follow the instructions on the official Netlify Docs. Do not ever try to fork/copy a repo with a initialized LFS/Large Media: it won't work.
 
-You can use the above mentioned `{{ picture }}` and `{{ image }}` filters safely: they will output queried URL's using Netlify's large media instead. This way, you can safely switch between lfs and non-lfs without having to rewrite your codebase. 
+You can use the above mentioned `{{ picture }}` and `{{ image }}` filters safely: they will output queried URL's using Netlify's large media instead. This way, you can safely switch between lfs and non-lfs without having to rewrite your codebase.
 
 
 
@@ -114,8 +116,9 @@ You can use the above mentioned `{{ picture }}` and `{{ image }}` filters safel
 
 `yarn pwa` and `yarn images:favicons` both run a gulp process that will generate all favicons needed and all the manifest files for service workers / search engines. Please note this command needs to be __manually__ run once on every favicon.jpg change because it is not part of the build process (in order to make it faster).
 
+`yarn js:build` runs a Parcel cli command that takes `/assets/js/script.js` and outputs a `script-bundle.js` file transpiled, tree-shaked and module-bundled.
+
 ## TODO
 
 - Rewrite LFS Query handling
-- Link preload/prefetch?
 

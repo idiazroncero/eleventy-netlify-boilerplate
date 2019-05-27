@@ -17,7 +17,8 @@
     "css": "yarn node-sass src/assets/scss/style.scss src/assets/css/style.css --source-map=true",
     "css:prod": "yarn node-sass src/assets/scss/style.scss src/assets/css/style.css --output-style=compressed",
     "css:watch": "yarn node-sass src/assets/scss/style.scss src/assets/css/style.css -w",
-    "css:post": "yarn postcss src/assets/css/style.css -o src/assets/css/style.css --no-map"
+    "css:post": "yarn postcss src/assets/css/style.css -o src/assets/css/style.css --no-map",
+    "js:build": "parcel build src/assets/js/script.js -d src/assets/js -o script-bundle.js"
   },
   "repository": {
     "type": "git",
@@ -51,6 +52,7 @@
     "markdown-it": "^8.4.1",
     "markdown-it-anchor": "^4.0.0",
     "node-sass": "^4.9.3",
+    "parcel": "^1.12.3",
     "patch-package": "^6.1.0",
     "postcss": "^7.0.2",
     "postcss-critical-split": "^2.5.3",
