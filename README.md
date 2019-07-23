@@ -121,4 +121,7 @@ You can use the above mentioned `{{ picture }}` and `{{ image }}` filters safel
 ## TODO
 
 - Rewrite LFS Query handling
+- Solve favicons bug
+- Add cache buster
+- Change gulp-responsive to (more supported?) https://github.com/scalableminds/gulp-image-resize
 
