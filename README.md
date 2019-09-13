@@ -9,7 +9,7 @@ This is a custom solution for static, NetlifyCMS-enabled websites developed by a
 
 It is itself a fork of [eleventy-netlify-boilerplate](https://github.com/danurbanowicz/eleventy-netlify-boilerplate).
 
-It uses gulp for asset handling, especially image handling (resize / minify). This could and should be moved into Eleventy's own build system in the future.
+It uses gulp for asset handling, especially image handling (resize / minify). This could and should be moved into Eleventy's own build system in the future (see issue [117](https://github.com/11ty/eleventy/issues/117)).
 
 For the front-end, it depends on [huesos](https://www.npmjs.com/package/huesos), a custom SCSS framework. The framework configuration overrides are handled on  `/src/assets/scss/_config.scss`.
 
@@ -17,9 +17,9 @@ For JavaScript, it uses Parcel CLI without any further configuration. We intent 
 
 ## Image assets
 
-Image handling is one of the biggest issues on static site generators. Without a live server-side tools like Imagick, the usual transform/crop/resize become a problem.
+Image handling is one of the biggest issues on static site generators. Without server-side tools like Imagick, the usual transform/crop/resize operations become a problem.
 
-This project stores all image assets that will need operations on `src/public` and exposes a `images.config.js` config file to decide which strategy to follow (git `lfs` can be either true or false) and how many crops are needed.
+This project stores all image assets that will need operations on `src/images`, output the files to `src/public/images/` and exposes a `images.config.js` config file to decide which strategy to follow (git `lfs` can be either true or false) and how many crops are needed.
 
 This is a sample `images.config.js`:
 
@@ -52,40 +52,54 @@ This is a sample `images.config.js`:
 }
 ```
 
+
 ### Using gulp
 
 If your site is not heavy on images, you can use the `image` scripts in order to generate all the needed crops and resizes and `.webp` versions.
 
-This sytem expects the user to upload to `src/assets/img` __only__ the larger image that needs to be available (by default, 1400px wide @ 2x = 2800px wide). 
+This system expects the user to upload to `src/public/images` __only__ the bigger image (i.e, with the default values, 1400px wide @ 2x = 2800px wide). 
 
-It will automatically create a normal and @2k version of four sizes: thumbnail, small, medium and large.. It will also make a `.webp` copy of every file.
+It will automatically create a normal and @2k version of four sizes: thumbnail, small, medium and large.. It will also make a `.webp` copy of every file. If it can't enlarge an image, it will silently fail and continue.
 
-If it can't enlarge an image, it will silently fail and continue.
+As we said before, thumbnail, small, medium and large are the defaults but you can configure the image sizes using `config.sizes` on `images.config.js`.
 
-To auto-generate all the markup needed for responsive images (we assume `100w` as the sizes attribute), use the custom `picture` nunjucks filter:
+### Using LFS
+
+Netlify provides support for [large media](https://www.netlify.com/docs/large-media/) using Git LFS.
+
+You will need to set up Git LFS. Follow the instructions on the official Netlify Docs. Do not ever try to fork/copy a repo with an initialized LFS/Large Media: it won't work.
+
+### Image filters
+
+To auto-generate all the markup needed for responsive images (we assume `100w` as the sizes attribute), use the custom `picture` nunjucks filter.
 
 ```
     {{ '/path/to/image/asset.png' | picture | safe }}
 ```
 
-We use `<picture>` instead of the leaner `<img srcset="" >` syntax in order to be able to use a `srcset` for `.webp`, a `.jpg srcset` fallback for less-capable browsers and finally a `<img>` tag for legacy browsers.
+We use `<picture>` instead of the leaner `<img srcset="" >` syntax in order to be able to use a `srcset` for `.webp` (if possible), a `.jpg srcset` fallback for less-capable browsers and finally a `<img>` tag for legacy browsers.
 
 Note that `safe` filter is needed in order to output HTML.
 
-For non-responsive images, an img filter is also provided in order to output both a `.webp` and a `.jpg` version;
+For non-responsive images, an img filter is also provided in order to output both a `.webp` and a `.jpg` version (when possible);
 
 ```
     {{ '/path/to/image/asset.png' | img | safe }}
 ```
 
-### Using LFS
+#### Wait... what if I use Git LFS?
 
-Netlify provides support for [large media](https://www.netlify.com/docs/large-media/) using git lfs.
+Both filters can detect which image strategy you're using (`lfs: true` or `false`) and adapt its output accordingly. This way, you can switch between lfs and non-lfs without having to rewrite your codebase. The main difference is that if you're using LFS and Netliy's large media, you'll get queried URLs (inetead of asset links) and you won't get the `webp` version.
 
-You will need to set up Git LFS in order for Large Media to work. Follow the instructions on the official Netlify Docs. Do not ever try to fork/copy a repo with a initialized LFS/Large Media: it won't work.
+## Favicons and PWA
 
-You can use the above mentioned `{{ picture }}` and `{{ image }}` filters safely: they will output queried URL's using Netlify's large media instead. This way, you can safely switch between lfs and non-lfs without having to rewrite your codebase.
+Uploading a `src/assets/img/favicon.jpg` file is mandatory in order to be able to run `yarn pwa` (or `yarn images:favicons`, both start the same gulp task).
 
+This commands will generate all the favicon sizes and all the manifest files for service workers / search engines. 
+
+Please note this command needs to be __manually__ run on every favicon.jpg change because it has been left outside the build process in order to speed it up.
+
+[Configuration reference](https://github.com/itgalaxy/favicons)
 
 
 ## Commands

@@ -63,20 +63,25 @@ function picture (sourceFile){
         return item.path + ' ' + item.width + 'w';
     });
 
-    var srcset2x = paths.map(item => {
-        return item.path2x + ' ' + item.width2x + 'w';
+    console.log(paths);
+
+    var srcsetString = paths.map(item => {
+        var array = [];
+        array.push( item.path + ' ' + item.width + 'w' );
+        if(item.path2x) {
+            array.push( item.path2x + ' ' + item.width2x + 'w' );
+        }
+        return array.join(',')
     });
 
-    var srcsetWebp = paths.map(item => {
-        return item.pathWebp + ' ' + item.width + 'w';
+    var srcsetWebpString = paths.map(item => {
+        var array = [];
+        array.push( item.pathWebp + ' ' + item.width + 'w' );
+        if(item.path2xWebp) {
+            array.push( item.path2xWebp + ' ' + item.width + 'w' );
+        }
+        return array.join(',')
     });
-
-    var srcset2xWebp = paths.map(item => {
-        return item.path2xWebp + ' ' + item.width + 'w';
-    });
-
-    var srcsetString = [...srcset, ...srcset2x].join(',');
-    var srcsetWebpString = [...srcsetWebp, ...srcset2xWebp].join(',');
 
     return `<picture>
               <source type="image/webp"

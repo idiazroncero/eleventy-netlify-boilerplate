@@ -4,21 +4,22 @@
 // --------------------
 
 // We recommend to import a palx palette and use their nomenclature
+// but you can use your preferred tool or write directly here instead...
 @import "base/palettes/306BAC";
 
 $colors: (
 	base: (
-		"primary": $blue6,
-		"secondary": $orange6,
-		"separator": $gray2,
+		"primary": $cyan7,
+		"secondary": $blue7,
+		"separator": $gray1,
 		"black": $gray9,
 		"white": #fff,
 	),
 
 	text: (
 		"primary":   $gray9,
-		"heading":   $blue9,
-		"mark" : $orange5,
+		"heading":   $cyan6,
+		"mark" : $orange4,
 	),
 
 	background: (
@@ -28,11 +29,10 @@ $colors: (
 	),
 
 	state: (
-		"muted":   $gray9,
-		"success": $teal4,
-		"warning": $yellow5,
-		"error":   $red5,
-		"caca": limegreen,
+		"muted":   $gray4,
+		"success": $teal5,
+		"warning": $yellow4,
+		"error":   $red6,
 	)
 ) !default;
 
@@ -49,8 +49,8 @@ $contrast-light: #FFFFFF;
 $color-modify-ratio: 33%;
 
 // Darken and lighten % to apply to split-color operations
-$darken-split-ratio: 70%;
-$lighten-split-ratio: 40%;
+$darken-split-ratio: 50%;
+$lighten-split-ratio: 50%;
 
 // Lightness threshold for color invertion. A value between 0-100.
 $lightness-threshold: 60;
@@ -77,10 +77,13 @@ $ritmo-border-width: 1px;
 $round-to-nearest-half-size: true;
 
 // Show a grid to see vertical rhythm in action
-$show-grid: true;
+$show-grid: false;
 
 // A "spacer" is a basic unit for both vertical and horizontal spacing
+// The common alias is $gutter
+$spacer-lines: 4;
 $spacer: ritmo(4); 
+$gutter: $spacer;
 
 
 
@@ -114,11 +117,12 @@ $courier: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida S
 
 // Global variables. It is good practice (performance & design) to only use one or two typefaces.
 $font-main: $system;
-$font-secondary: $trebuchet;
+$font-secondary: $trebuchet; // Set to false to only onse one font
 $font-monospace: $courier;
 
 // Setting custom values for bold and light (100, 500, etc) allow for more precise mapping
-// Don't touch the settings to keep them by default.
+// Important! Don't set this to invalid font-weight values or falsy values.
+// Some mixins and functions need valid values in order to work!
 $font-main-bold: bold;
 $font-secondary-bold: bold;
 $light: lighter;
@@ -126,15 +130,15 @@ $normal: normal;
 
 // List of all elements which use $font-secondary.
 $font-secondary-items:
-	h1, h2, h3, h4, dt,
-	'.your-classes',
-	'#your-ids';
+	h1, h2, h3, h4, h5, h6, dt;
+	// '.your-classes',
+	// '#your-ids';
 
-// Heading overrides
+// Heading overrides and configuration
 // Select a font weight and an alternate line height for your headings
 $heading-font-weight: bold;
-$heading-vertical-rhythm: false; // We might want a slower VR for headings. Set to false if not.
 $heading-letter-spacing: -0.03em; // Headings benefit of a reduced letter-spacing 
+$heading-decorated-links: false; // Wether to decorate or not links inside headings
 
 // Text alignment for some elements
 $caption-align: left;
@@ -147,14 +151,23 @@ $figcaption-align: left;
 $quotes: "«" "»" "“" "”";
 
 // Code-like items
-$code-background: get-color(text, heading);
-$code-border-radius: 2px;
+$code-background: $yellow1;
+$code-block-background: $gray9; // You might want to apply a different bg to block elements using .code-block
+$code-border-radius: 10px;
 
 // Letter-spacing (always EM units to keep it relative to the element scope)
-$letter-spacing: 0.05em; 
+$letter-spacing: 0.1em; 
 
+// List margin-bottom between <li> items.
+$list-separator: $gutter / 2;
 // List paddings. We recommend either 1em or 0.
 $list-padding: 0;
+
+// Maximum characters per line, to apply using .max-ch class
+$max-ch: 65ch;
+
+// Mark padding
+$mark-padding: 2px;
 
 
 
@@ -178,17 +191,31 @@ $golden-ratio:     1.618 !default;
 $scale-ratio: $perfect-fourth !default;
 
 // Uses concise.css typeScale mixin to map font-sizes
+$h0-font-size: typeScale(7); // Extra big font
 $h1-font-size: typeScale(6);
 $h2-font-size: typeScale(5);
 $h3-font-size: typeScale(4);
 $h4-font-size: typeScale(3);
 $h5-font-size: typeScale(2); // Equals base-font-size
 $h6-font-size: typeScale(1);
+$h7-font-size: typeScale(0); // Extra small font
+
+// Set vetical rhythm using ritmo lines for headings
+// This might be needed to manually override automatic ritmo.scss calculations
+// For example: h1 and h2 legibility usually benefit from a reduced line height.
+$h1-ritmo-lines: 8;
+$h2-ritmo-lines: 6;
+$h3-ritmo-lines: 6;
+$h4-ritmo-lines: 4;
+$h5-ritmo-lines: 4;
+$h6-ritmo-lines: 2;
 
 // Set font sizes of specific, size-aware elements
 $sub-font-size: $h6-font-size;
 $small-font-size: $h6-font-size;
 $figcaption-font-size: $h6-font-size;
+$label-font-size: $h6-font-size;
+$fieldset-font-size: $h5-font-size;
 
 
 
@@ -204,7 +231,7 @@ $figcaption-font-size: $h6-font-size;
 
 $border-radius: 0px;
 
-$separators: true;
+$separators: true; // Set this to false to disable all separators
 $separator-width: 1px;
 $separator-color: get-color(base, separator);
 
@@ -214,10 +241,9 @@ $table-padding: $spacer / 2;
 $table-th-align: left;
 
 $blockquote-whitespace: $spacer * 2;
-$blockquote-font: $font-secondary;
 
 $shadows: true;
-$shadow-definition: 2px 2px 2px 0px rgba($black, 0.1);
+$box-shadow: 2px 2px 2px 0px rgba($black, 0.1);
 
 
 
@@ -230,8 +256,8 @@ $shadow-definition: 2px 2px 2px 0px rgba($black, 0.1);
 // ------
 
 // Only for $link-strategy:border
-$link-border-color: $violet1;
-$link-border-color-hover: $violet2; // You can set a different color on :hover
+$link-border-color: $indigo1;
+$link-border-color-hover: $indigo2; // You can set a different color on :hover
 $link-border-width: ritmo(1);
 
 // Only for $link-strategy:mark
@@ -240,16 +266,16 @@ $link-mark-color-hover: $violet2;
 $link-mark-padding: 4px;
 
 // Only for $link-strategy:border-inset
-$link-border-inset-color: $fuschia1;
-$link-border-inset-color-hover: $fuschia1;
+$link-border-inset-color: $indigo0;
+$link-border-inset-color-hover: $indigo0;
 $link-border-inset-width: 0.33em;
-$link-border-inset-width-hover: 0.66em;
+$link-border-inset-width-hover: 1em;
 
 // Link colors
-$link-color: $red8;
-$link-visited: $red8;
-$link-hover: $fuschia6;
-$link-active: $red8;
+$link-color: $cyan9;
+$link-visited: $cyan8;
+$link-hover: $indigo7;
+$link-active: $indigo7;
 
 // BUILD YOUR OWN LINK
 // You can choose one strategy for every state!
@@ -261,7 +287,7 @@ $link-active: $red8;
 // - border-inset - Pseudo-element that fakes a border bottom that grows from bottom to top
 // - mark - Background-color (as in a <mark> element)
 //
-$link-strategy-default: 'border-inset';
+$link-strategy-default: 'underline';
 $link-strategy-hover: 'border-inset';
 
 $link-alternative-strategies: false;
@@ -276,8 +302,8 @@ $link-alternative-strategies: false;
 // );
 
 // Inverse link colors and strategy (for contrasted backgrounds)
-$inverse-link-color: $white;
-$inverse-link-visited: $white;
+$inverse-link-color: $blue1;
+$inverse-link-visited: $blue1;
 $inverse-link-hover: $blue2;
 $inverse-link-active: $blue2;
 $inverse-link-strategy-default:'underline';
@@ -293,18 +319,21 @@ $inverse-link-strategy-hover: false;
 // Global variables
 $form-border-radius: $border-radius;
 
+// Labels
+$label-as-minititle: true;
+
 // Inputs
 $input-border-strategy: full; // Options: full, bottom, none;
 $input-border-color: $gray2;
 $input-border-width: 1px;
 $input-padding-lines: 1;
-$input-border: $input-border-width solid $input-border-color;
-$input-padding: $spacer / 4 $spacer / 2;
 
 // Buttons
 $button-font-family: $font-main;
+$button-font-size: $h6-font-size;
 $button-border-width: 2px;
-$button-padding: 0 ($spacer / 2);
+$button-ritmo-height: 6; // Ritmo line units
+$button-ritmo-padding-x: 2;
 $button-border-radius: 2px; // $border-radius;
 $button-weight: bold(button);
 $button-invert-color: false; // ONly valid on border:fill and background
@@ -319,8 +348,8 @@ $button-invert-color: false; // ONly valid on border:fill and background
 // - split-inverse - Inverse of split
 //
 // Note that background and outline can be considered "inverse" of each other
-$button-strategy-default: 'split';
-$button-strategy-hover: 'split-inverse';
+$button-strategy-default: 'outline';
+$button-strategy-hover: 'background';
 
 $button-alternative-strategies: false;
 
@@ -349,12 +378,6 @@ $pseudo-radio: false;
 $pseudo-border-color: $gray8;
 $pseudo-border: 1px solid $pseudo-border-color;
 
-// Selects
-$select-border-strategy: full; // Options: full, bottom, none;
-$select-border-color: shade($gray5, 25%);
-$select-border: 1px solid $input-border-color;
-$select-padding: 0 ($spacer / 2);
-
 // Browser quirks
 $webkit-autofill-color: $gray5; // When webkit fills the fields whith your stored data.
 
@@ -373,14 +396,15 @@ $nav-kill-links: true;
 $nav-font-size: $base-font-size;
 $nav-spacing: $letter-spacing;
 
-$toc-font-weight: bold;
+$toc-font-weight: normal;
 $toc-uppercase: false;
 $toc-font-size: $h5-font-size;
+$toc-kill-links: $nav-kill-links;
 
-$menu-padding: $spacer / 3 $spacer / 2;
+$menu-x-padding: ritmo(2);
 $menu-kill-links: true; // Kills decoration
-$menu-background-color: $gray4;
-$menu-color-ratio: 5%;
+$menu-background-color: $gray2;
+$menu-font-size: $nav-font-size;
 
 $breadcrumb-kill-links: true; // Kills decoration
 $breadcrumb-font-size: $h6-font-size; // False avoids setting this value
@@ -392,6 +416,8 @@ $breadcrumb-arrow: "›"; // Valid unicode character
 
 $tag-strategy: 'contrast'; // One of split or contrast
 $tag-default-color: $gray3;
+$tag-padding: 0 $gutter / 4; // Shorthand
+$tag-font-size: $h6-font-size;
 
 // ------
 // ALERTS
@@ -436,6 +462,7 @@ $huesitos: true;
 $z-index : (
 	item1 : 0,
 	item2 : 1,
+	  item3 : 3,
 );
 
 
@@ -481,8 +508,6 @@ $disabled-opacity: 0.33;
 // Because sometimes you remember the wrong / old / deprecated word...
 // ------
 
-$gutter: $spacer;
-
 
 
 
@@ -492,10 +517,12 @@ $gutter: $spacer;
 // Component for indvidual, card-like componentes
 // ------
 
-$card-border: 1px solid $separator-color;// Can be false or a full border value, like 2px solid $separator-color;
+$card-border-width: 1px; // Set to false to avoid border
+$card-border-color: $separator-color;// Can be false or a full border value, like 2px solid $separator-color;
 $card-background: $white;
 $card-border-radius: $border-radius;
-$card-padding: $gutter * 2;
+$card-padding: 8; // In base-line-multi
+$card-shadow: true; // Aplies shadow-definition
 
 
 

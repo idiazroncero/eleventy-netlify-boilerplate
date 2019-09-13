@@ -4,7 +4,7 @@ backend:
 
 # Uncomment below to enable drafts
 # publish_mode: editorial_workflow
-media_folder: 'src/public/images'
+media_folder: 'src/images'
 public_folder: 'public/images'
 
 collections:

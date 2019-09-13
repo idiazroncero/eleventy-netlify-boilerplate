@@ -7,6 +7,7 @@ const converter = new showdown.Converter();
 const pictureFilter = require('./filters/picture');
 const imageFilter = require('./filters/image');
 const pluginPWA = require("eleventy-plugin-pwa");
+const cacheBuster = require('@mightyplow/eleventy-plugin-cache-buster');
 
 //
 // CONFIG
@@ -76,6 +77,10 @@ module.exports = function(eleventyConfig) {
 
   // Plugins
   eleventyConfig.addPlugin(pluginPWA);
+  const cacheBusterOptions = {
+    outputDirectory: 'dist'
+  };
+  eleventyConfig.addPlugin(cacheBuster(cacheBusterOptions));
 
   /* Markdown Plugins */
   let markdownIt = require("markdown-it");

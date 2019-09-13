@@ -1,7 +1,7 @@
 const config =  {
     // Common
-    sourceDir : './src/public/images',
-    relativeSourceDir : '/public/images',
+    sourceDir : './src/public/images/dist',
+    relativeSourceDir : '/public/images/dist',
     // Set to true to use LFS
     lfs : false,
     // If lfs = true;

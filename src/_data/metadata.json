@@ -2,7 +2,7 @@
   "sitename": "Eleventy Netlify CMS",
   "title": "Eleventy Netlify CMS",
   "url": "https://eleventy-netlify-cms.netlify.com",
-  "pwa" : true,
+  "pwa" : false,
   "mobileColor": "#306bac",
   "author": {
     "name": "Ignacio Díaz-Roncero",
