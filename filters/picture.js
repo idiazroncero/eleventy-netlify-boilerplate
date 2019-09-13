@@ -59,12 +59,6 @@ function picture (sourceFile){
         return item != false;
     });
 
-    var srcset = paths.map(item => {
-        return item.path + ' ' + item.width + 'w';
-    });
-
-    console.log(paths);
-
     var srcsetString = paths.map(item => {
         var array = [];
         array.push( item.path + ' ' + item.width + 'w' );
