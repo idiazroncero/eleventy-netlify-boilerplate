@@ -72,6 +72,7 @@
     "uglify-js": "^3.4.5"
   },
   "dependencies": {
+    "gulp-postcss": "^8.0.0",
     "postcss-cli": "^6.1.2",
     "stylelint": "^10.0.1"
   }
