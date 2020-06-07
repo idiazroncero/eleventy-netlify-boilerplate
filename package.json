@@ -18,7 +18,8 @@
     "css:prod": "yarn node-sass src/assets/scss/style.scss src/assets/css/style.css --output-style=compressed",
     "css:watch": "yarn node-sass src/assets/scss/style.scss src/assets/css/style.css -w",
     "css:post": "yarn postcss src/assets/css/style.css -o src/assets/css/style.css --no-map",
-    "js:build": "parcel build src/assets/js/script.js -d src/assets/js -o script-bundle.js"
+    "ts:build": "parcel build src/assets/js/script.ts -d src/assets/js -o script-bundle.js",
+    "ts:lint": "yarn tsc"
   },
   "repository": {
     "type": "git",
@@ -66,6 +67,7 @@
     "sass": "^1.13.4",
     "sharp": "^0.22.0",
     "showdown": "^1.9.0",
+    "typescript": "^3.9.3",
     "uglify-es": "^3.3.9",
     "uglify-js": "^3.4.5"
   },
