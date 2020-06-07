@@ -8,7 +8,7 @@
 const { lfs, sizes, sizeNames, sourceDir } = require('./images.config'); 
 
 // Require gulp core utils and all gulp plugins
-const {dest, src, series } = require('gulp');
+const {dest, src, series, watch } = require('gulp');
 const imagemin = require('gulp-imagemin');
 const webp = require('gulp-webp');
 const responsive = require('gulp-responsive');
@@ -16,7 +16,10 @@ const del = require('del');
 const favicons = require("gulp-favicons");
 const changed = require('gulp-changed');
 const debug = require('gulp-debug');
-
+const sass = require('gulp-sass');
+const postcss = require('gulp-postcss');
+const autoprefixer = require('autoprefixer');
+sass.compiler = require('node-sass');
 // Require eleventy's metadata
 const metadata = require ("./src/_data/metadata.json");
 
@@ -167,6 +170,18 @@ function resizeImages() {
 }
 
 
+// SCSS Compilation
+function scss() {
+    return src('./src/assets/scss/**/*.scss')
+        .pipe(sass({
+            includePaths: ['node_modules']
+        })
+        .on('error', sass.logError))
+        .pipe(postcss([ autoprefixer() ]))
+        .pipe(dest('./src/assets/css'));
+}
+
+
 // ------
 // GULP TASKS
 // Define publicly available tasks
@@ -177,6 +192,10 @@ exports.resizeImages = resizeImages;
 exports.minifyImages = minifyImages;
 exports.createWebp = createWebp;
 exports.generatePwaFavicons = series(generatePwaFavicons, moveFaviconHtml);
+exports.scss = scss;
+exports.scssWatch = function() {
+    watch('./src/assets/scss/**/*.scss', scss);
+}
 
 // Set the correct processImages task
 if(lfs) {
@@ -184,3 +203,4 @@ if(lfs) {
 } else {
     exports.processImages = series(cleanImages,resizeImages, createWebp, minifyImages);
 }
+

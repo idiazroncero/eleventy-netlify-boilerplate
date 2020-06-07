@@ -14,9 +14,9 @@
     "images:minify": "yarn gulp minifyImages",
     "images:favicons": "yarn gulp generatePwaFavicons",
     "pwa": "yarn gulp generatePwaFavicons",
-    "css": "yarn node-sass src/assets/scss/style.scss src/assets/css/style.css --source-map=true",
+    "css": "yarn gulp scss",
+    "css:watch": "yarn gulp scssWatch",
     "css:prod": "yarn node-sass src/assets/scss/style.scss src/assets/css/style.css --output-style=compressed",
-    "css:watch": "yarn node-sass src/assets/scss/style.scss src/assets/css/style.css -w",
     "css:post": "yarn postcss src/assets/css/style.css -o src/assets/css/style.css --no-map",
     "ts:build": "parcel build src/assets/js/script.ts -d src/assets/js -o script-bundle.js",
     "ts:lint": "yarn tsc"

@@ -9,9 +9,9 @@ echo "------------------------------------------------------------------------$(
 yarn css:post
 
 echo "$(tput setaf 5)------------------------------------------------------------------------------------------------"
-echo "3 - Javascript: use Parcel.js to bundle and transpile the JS file"
+echo "3 - Typecript: use Parcel.js to bundle and transpile the TS file"
 echo "$(tput setaf 5)------------------------------------------------------------------------------------------------$(tput sgr0)"
-yarn js:build
+yarn ts:build
 
 echo "$(tput setaf 5)------------------------------------------------------------------------------------------------"
 echo "4 - Images: clean, minify and (if LFS = false) generate crops and resizes, using Gulp"
