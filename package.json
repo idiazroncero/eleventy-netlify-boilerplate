@@ -18,7 +18,7 @@
     "css:prod": "yarn node-sass src/assets/scss/style.scss src/assets/css/style.css --output-style=compressed",
     "css:watch": "yarn node-sass src/assets/scss/style.scss src/assets/css/style.css -w",
     "css:post": "yarn postcss src/assets/css/style.css -o src/assets/css/style.css --no-map",
-    "js:build": "parcel build src/assets/js/script.js -d src/assets/js -o script-bundle.js"
+    "js:build": "parcel build src/assets/js/script.ts -d src/assets/js -o script-bundle.js"
   },
   "repository": {
     "type": "git",
@@ -51,7 +51,7 @@
     "gulp-sourcemaps": "^2.6.4",
     "gulp-webp": "^4.0.1",
     "html-minifier": "^3.5.19",
-    "huesos": "^1.0.1",
+    "huesos": "idiazroncero/huesos#dev",
     "kss": "^3.0.0-beta.23",
     "luxon": "^1.0.0",
     "markdown-it": "^8.4.1",
@@ -66,6 +66,7 @@
     "sass": "^1.13.4",
     "sharp": "^0.22.0",
     "showdown": "^1.9.0",
+    "typescript": "^3.9.3",
     "uglify-es": "^3.3.9",
     "uglify-js": "^3.4.5"
   },
