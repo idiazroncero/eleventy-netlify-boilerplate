@@ -4,10 +4,9 @@ const UglifyJS = require("uglify-es");
 const htmlmin = require("html-minifier");
 const showdown = require('showdown');
 const converter = new showdown.Converter();
-const pictureFilter = require('./filters/picture');
-const imageFilter = require('./filters/image');
 const pluginPWA = require("eleventy-plugin-pwa");
 const cacheBuster = require('@mightyplow/eleventy-plugin-cache-buster');
+const Image = require("@11ty/eleventy-img");
 
 //
 // CONFIG
@@ -26,8 +25,30 @@ module.exports = function(eleventyConfig) {
     return html;
   });
 
-  eleventyConfig.addFilter("picture", pictureFilter );
-  eleventyConfig.addFilter("image", imageFilter );
+  // eleventyConfig.addFilter("picture", pictureFilter );
+  // eleventyConfig.addFilter("image", imageFilter );
+
+  eleventyConfig.addNunjucksAsyncShortcode("image", async function(src, alt, outputFormat) {
+    if(alt === undefined) {
+      // You bet we throw an error on missing alt (alt="" works okay)
+      throw new Error(`Missing \`alt\` on myImage from: ${src}`);
+    }
+
+    let realSrc = `src/public/images/${src}`;
+
+    // returns Promise
+    let stats = await Image(realSrc, {
+      formats: [outputFormat],
+      urlPath: "public/images/processed",
+      outputDir: "src/public/images/processed",
+      // Maximum size.
+      widths: [1200]
+    });
+
+    let props = stats[outputFormat].pop();
+
+    return `<img src="${props.url}" width="${props.width}" height="${props.height}" alt="${alt}">`;
+  });
 
   // Date formatting (machine readable)
   eleventyConfig.addFilter("machineDate", dateObj => {
@@ -72,7 +93,6 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/assets");
   eleventyConfig.addPassthroughCopy("src/admin");
   eleventyConfig.addPassthroughCopy("src/public");
-
 
   // Plugins
   eleventyConfig.addPlugin(pluginPWA);

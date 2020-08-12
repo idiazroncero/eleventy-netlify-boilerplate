@@ -13,15 +13,8 @@ echo "3 - Javascript: use Parcel.js to bundle and transpile the JS file"
 echo "$(tput setaf 5)------------------------------------------------------------------------------------------------$(tput sgr0)"
 yarn js:build
 
-echo "$(tput setaf 5)------------------------------------------------------------------------------------------------"
-echo "4 - Images: clean, minify and (if LFS = false) generate crops and resizes, using Gulp"
-echo "    If this step takes too long, consider switching to LFS"
-echo "    or a third-party system for asset handling"
-echo "$(tput setaf 5)------------------------------------------------------------------------------------------------$(tput sgr0)"
-yarn images
-
 echo "$(tput setaf 5)------------------------------------------------------------------------"
-echo "5 - Generate the static assets on /dist folder, using Eleventy"
+echo "4 - Generate the static assets on /dist folder, using Eleventy"
 echo "------------------------------------------------------------------------$(tput sgr0)"
 yarn eleventy
 

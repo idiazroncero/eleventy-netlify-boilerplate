@@ -1,38 +1,117 @@
 // --------------------
 // COLOR PALETTE
-// Using https://palx.jxnblk.com/
+// Recommended set of tools: 
+// Palette from color base: https://palx.jxnblk.com/
+// AI-generated palette: http://khroma.co/generator/
+// Semantic colors from base color: https://colors.eva.design/
 // --------------------
 
-// We recommend to import a palx palette and use their nomenclature
-// but you can use your preferred tool or write directly here instead...
-@import "base/palettes/306BAC";
+// We recommend to import here a palette .scss partial to avoid bloat.
+// Hand-picked colors from Khroma:
+$primary: #146d56;
+$secondary: #f7a57c;
+$background:#d0d7ce;
+
+// Semantic colors and variations from Eva.design
+$primary-100: #CFF7DD;
+$primary-200: #A1F0C5;
+$primary-300: #6BD3A4;
+$primary-400: #40A782;
+$primary-500: #146D56;
+$primary-600: #0E5D50;
+$primary-700: #0A4E4A;
+$primary-800: #063D3F;
+$primary-900: #032E34;
+
+$secondary-100: #FEF4E5;
+$secondary-200: #FEE6CB;
+$secondary-300: #FCD3B1;
+$secondary-400: #FAC19C;
+$secondary-500: #F7A57C;
+$secondary-600: #D47B5A;
+$secondary-700: #B1563E;
+$secondary-800: #8F3627;
+$secondary-900: #761F17;
+
+$success-100: #CDFACD;
+$success-200: #9DF6A6;
+$success-300: #68E481;
+$success-400: #41CA6A;
+$success-500: #10A84D;
+$success-600: #0B904E;
+$success-700: #08784B;
+$success-800: #056145;
+$success-900: #035041;
+
+$info-100: #CAEAFB;
+$info-200: #96D1F8;
+$info-300: #5FADEA;
+$info-400: #3788D5;
+$info-500: #0358BA;
+$info-600: #02449F;
+$info-700: #013285;
+$info-800: #00236B;
+$info-900: #001959;
+
+$warning-100: #FBF8C9;
+$warning-200: #F7F095;
+$warning-300: #E8DD5D;
+$warning-400: #D2C435;
+$warning-500: #B5A301;
+$warning-600: #9B8A00;
+$warning-700: #827200;
+$warning-800: #685B00;
+$warning-900: #564A00;
+
+$danger-100: #FCE2D1;
+$danger-200: #F9BEA4;
+$danger-300: #ED9073;
+$danger-400: #DB644F;
+$danger-500: #C4281D;
+$danger-600: #A81517;
+$danger-700: #8D0E1B;
+$danger-800: #71091C;
+$danger-900: #5E051D;
+
+// Gray colors from palx
+
+$gray-100: #f8faf8;
+$gray-200: #ebefea;
+$gray-300: #dce3db;
+$gray-400: #cdd5cb;
+$gray-500: #bec6bc;
+$gray-600: #aeb5ac;
+$gray-700: #9ba299;
+$gray-800: #858b84;
+$gray-900: #696d68;
+$black: #3d403d;
 
 $colors: (
 	base: (
-		"primary": $cyan7,
-		"secondary": $blue7,
-		"separator": $gray1,
-		"black": $gray9,
+		"primary": $primary,
+		"secondary": $secondary,
+		"separator": $gray-300,
+		"black": $black,
 		"white": #fff,
 	),
 
 	text: (
-		"primary":   $gray9,
-		"heading":   $cyan6,
-		"mark" : $orange4,
+		"primary": $black,
+		"heading": $primary-500,
+		"mark" : $warning-400,
 	),
 
 	background: (
-		"dark":  $gray8,
-		"dim" : $gray1,
-		"light": $gray0,
+		"dark":  darken($background, 10%),
+		"dim" : $background,
+		"light": lighten($background, 10%),
 	),
 
 	state: (
-		"muted":   $gray4,
-		"success": $teal5,
-		"warning": $yellow4,
-		"error":   $red6,
+		"muted":   $gray-400,
+		"success": $success-500,
+		"warning": $warning-500,
+		"error":   $danger-500,
 	)
 ) !default;
 
@@ -82,7 +161,7 @@ $show-grid: false;
 // A "spacer" is a basic unit for both vertical and horizontal spacing
 // The common alias is $gutter
 $spacer-lines: 4;
-$spacer: ritmo(4); 
+$spacer: ritmo(4);
 $gutter: $spacer;
 
 
@@ -115,9 +194,9 @@ $courier: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida S
 // Add here your custom fonts, if needed
 
 
-// Global variables. It is good practice (performance & design) to only use one or two typefaces.
+// Global variables. It is good practice (performance & design) to use a maximum of two typefaces.
 $font-main: $system;
-$font-secondary: $trebuchet; // Set to false to only onse one font
+$font-secondary: $garamond; // Set to false to only only one font
 $font-monospace: $courier;
 
 // Setting custom values for bold and light (100, 500, etc) allow for more precise mapping
@@ -128,7 +207,7 @@ $font-secondary-bold: bold;
 $light: lighter;
 $normal: normal;
 
-// List of all elements which use $font-secondary.
+// List of all elements which use $font-secondary. Set $font-secondary to 'false' to set none.
 $font-secondary-items:
 	h1, h2, h3, h4, h5, h6, dt;
 	// '.your-classes',
@@ -137,7 +216,7 @@ $font-secondary-items:
 // Heading overrides and configuration
 // Select a font weight and an alternate line height for your headings
 $heading-font-weight: bold;
-$heading-letter-spacing: -0.03em; // Headings benefit of a reduced letter-spacing 
+$heading-letter-spacing: -0.03em; // Headings benefit of a reduced letter-spacing
 $heading-decorated-links: false; // Wether to decorate or not links inside headings
 
 // Text alignment for some elements
@@ -151,12 +230,12 @@ $figcaption-align: left;
 $quotes: "«" "»" "“" "”";
 
 // Code-like items
-$code-background: $yellow1;
-$code-block-background: $gray9; // You might want to apply a different bg to block elements using .code-block
+$code-background: $secondary-300;
+$code-block-background: $primary-900; // You might want to apply a different bg to block elements using .code-block
 $code-border-radius: 10px;
 
 // Letter-spacing (always EM units to keep it relative to the element scope)
-$letter-spacing: 0.1em; 
+$letter-spacing: 0.1em;
 
 // List margin-bottom between <li> items.
 $list-separator: $gutter / 2;
@@ -164,7 +243,7 @@ $list-separator: $gutter / 2;
 $list-padding: 0;
 
 // Maximum characters per line, to apply using .max-ch class
-$max-ch: 65ch;
+$max-ch: 75ch;
 
 // Mark padding
 $mark-padding: 2px;
@@ -207,7 +286,7 @@ $h1-ritmo-lines: 8;
 $h2-ritmo-lines: 6;
 $h3-ritmo-lines: 6;
 $h4-ritmo-lines: 4;
-$h5-ritmo-lines: 4;
+$h5-ritmo-lines: 3;
 $h6-ritmo-lines: 2;
 
 // Set font sizes of specific, size-aware elements
@@ -256,56 +335,50 @@ $box-shadow: 2px 2px 2px 0px rgba($black, 0.1);
 // ------
 
 // Only for $link-strategy:border
-$link-border-color: $indigo1;
-$link-border-color-hover: $indigo2; // You can set a different color on :hover
+$link-border-color: $primary-300;
+$link-border-color-hover: $primary-500; // You can set a different color on :hover
 $link-border-width: ritmo(1);
 
-// Only for $link-strategy:mark
-$link-mark-color: $violet1;
-$link-mark-color-hover: $violet2;
-$link-mark-padding: 4px;
-
 // Only for $link-strategy:border-inset
-$link-border-inset-color: $indigo0;
-$link-border-inset-color-hover: $indigo0;
-$link-border-inset-width: 0.33em;
+$link-border-inset-color: $primary-100;
+$link-border-inset-color-hover: $primary-100;
+$link-border-inset-width: 0.25em;
 $link-border-inset-width-hover: 1em;
 
 // Link colors
-$link-color: $cyan9;
-$link-visited: $cyan8;
-$link-hover: $indigo7;
-$link-active: $indigo7;
+$link-color: $primary-700;
+$link-visited: $primary-600;
+$link-hover: $primary-600;
+$link-active: $primary-900;
 
 // BUILD YOUR OWN LINK
 // You can choose one strategy for every state!
 //
-// Available strategies: 
+// Available strategies:
 // - false - No styling
 // - underline - Normal, text-decoration:underline
 // - border - Border-bottom with custom width
 // - border-inset - Pseudo-element that fakes a border bottom that grows from bottom to top
-// - mark - Background-color (as in a <mark> element)
 //
-$link-strategy-default: 'underline';
-$link-strategy-hover: 'border-inset';
+$link-strategy-default: "border-inset";
+$link-strategy-hover: "border-inset";
 
 $link-alternative-strategies: false;
 
 // Example of $link-alternative-strategies:
 //
 // $link-alternative-strategies: (
-// 	mark : (
-// 		default : 'mark', 
-// 		hover : 'mark'
+// 	border : (
+// 		default : 'border',
+// 		hover : 'border-inset'
 // 	),
 // );
 
 // Inverse link colors and strategy (for contrasted backgrounds)
-$inverse-link-color: $blue1;
-$inverse-link-visited: $blue1;
-$inverse-link-hover: $blue2;
-$inverse-link-active: $blue2;
+$inverse-link-color: $primary-100;
+$inverse-link-visited: $primary-100;
+$inverse-link-hover: $primary-200;
+$inverse-link-active: $primary-200;
 $inverse-link-strategy-default:'underline';
 $inverse-link-strategy-hover: false;
 
@@ -324,24 +397,25 @@ $label-as-minititle: true;
 
 // Inputs
 $input-border-strategy: full; // Options: full, bottom, none;
-$input-border-color: $gray2;
+$input-border-color: $gray-200;
 $input-border-width: 1px;
-$input-padding-lines: 1;
+$input-padding-lines: 2;
 
 // Buttons
 $button-font-family: $font-main;
 $button-font-size: $h6-font-size;
 $button-border-width: 2px;
 $button-ritmo-height: 6; // Ritmo line units
-$button-ritmo-padding-x: 2;
+$button-ritmo-padding-x: 3;
 $button-border-radius: 2px; // $border-radius;
 $button-weight: bold(button);
-$button-invert-color: false; // ONly valid on border:fill and background
+$button-invert-color: false; // Only valid on border:fill and background
+$button-color-ratio: 10%; // Ratio to apply for color darkening. Positive for darken, negative for lighten.
 
 // BUILD YOUR OWN BUTTON
 // You can choose one strategy for every state!
 //
-// Available strategies: 
+// Available strategies:
 // - outline - Colored outline and text, background transparent
 // - background - Background solid, font contrasted.
 // - split - Background colored dim, font colored dark, based on same color
@@ -358,28 +432,28 @@ $button-alternative-strategies: false;
 //
 // $button-alternative-strategies: (
 // 	split : (
-// 		default : 'split', 
+// 		default : 'split',
 // 		hover : 'split-inverse'
 // 	),
 // );
 
 
 $button-states : (
-	primary: get-color(base, primary), 
-	secondary: get-color(base, secondary), 
-	success: get-color(state, success), 
-	warning: get-color(state, warning),  
-	error: get-color(state, error), 
+	primary: get-color(base, primary),
+	secondary: get-color(base, secondary),
+	success: get-color(state, success),
+	warning: get-color(state, warning),
+	error: get-color(state, error),
 );
 
 // Checkboxes / Selects
 $pseudo-checkbox : false;
 $pseudo-radio: false;
-$pseudo-border-color: $gray8;
+$pseudo-border-color: $gray-800;
 $pseudo-border: 1px solid $pseudo-border-color;
 
 // Browser quirks
-$webkit-autofill-color: $gray5; // When webkit fills the fields whith your stored data.
+$webkit-autofill-color: $gray-500; // When webkit fills the fields whith your stored data.
 
 // Fieldsets
 $disable-fieldset: false;
@@ -403,7 +477,7 @@ $toc-kill-links: $nav-kill-links;
 
 $menu-x-padding: ritmo(2);
 $menu-kill-links: true; // Kills decoration
-$menu-background-color: $gray2;
+$menu-background-color: $gray-200;
 $menu-font-size: $nav-font-size;
 
 $breadcrumb-kill-links: true; // Kills decoration
@@ -415,7 +489,7 @@ $breadcrumb-arrow: "›"; // Valid unicode character
 // ------
 
 $tag-strategy: 'contrast'; // One of split or contrast
-$tag-default-color: $gray3;
+$tag-default-color: $gray-300;
 $tag-padding: 0 $gutter / 4; // Shorthand
 $tag-font-size: $h6-font-size;
 
@@ -424,7 +498,7 @@ $tag-font-size: $h6-font-size;
 // ------
 
 $alert-strategy: 'split'; // One of split or contrast
-$alert-default-color: $gray3;
+$alert-default-color: $gray-300;
 
 // ------
 // GRID
@@ -462,7 +536,7 @@ $huesitos: true;
 $z-index : (
 	item1 : 0,
 	item2 : 1,
-	  item3 : 3,
+	item3 : 3,
 );
 
 

@@ -6,11 +6,7 @@ section: home
 {{ layoutContent | safe }}
 
 <section>
-    <h3>Image filter</h3>
-    {{ '1400x800.png' | image() | safe }}
-</section>
-<section>
-    <h3>Picture filter</h3>
-    {{ '1400x800.png' | picture | safe }}
+    <h3>Image Shortcode</h3>
+    {% image "1400x800.png", "my alt", "jpg" %}
 </section>
 
